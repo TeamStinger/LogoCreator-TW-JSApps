@@ -1,4 +1,5 @@
-define(['text!views/home.html', 'text!views/gallery.html'], function (homeTemplate, galleryTemplate) {
+define(['text!views/home.html', 'text!views/gallery.html', '../utils/viewRenderer'],
+    function (homeTemplate, galleryTemplate, viewRenderer) {
     var NavigationController = {
         clickHandler: function (event) {
             var viewName = $(event.target).data('href');
@@ -9,13 +10,11 @@ define(['text!views/home.html', 'text!views/gallery.html'], function (homeTempla
         },
 
         homeClick: function () {
-            // TODO: This will use ViewRenderer class
-            $('#view').html(homeTemplate);
+            viewRenderer.render('#view', homeTemplate, {});
         },
 
         galleryClick: function () {
-            // TODO: This will use ViewRenderer class
-            $('#view').html(galleryTemplate);
+            viewRenderer.render('#view', galleryTemplate, {});
         }
     };
 

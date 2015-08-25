@@ -1,10 +1,9 @@
-define(['text!views/home.html', 'text!views/gallery.html', './navigationController'],
-    function (homeTemplate, galleryTemplate, navigationController) {
+define(['text!views/home.html', 'text!views/gallery.html', '../utils/viewRenderer', './navigationController'],
+    function (homeTemplate, galleryTemplate, viewRenderer, navigationController) {
     var MainController = {
         init: function () {
             // TODO: Check if there is a logged in user
-            // TODO: This will use ViewRenderer class
-            $('#view').html(homeTemplate);
+            viewRenderer.render("#view", homeTemplate, {});
 
             $('.navbar').on('click', 'a', navigationController.clickHandler.bind(navigationController));
         }

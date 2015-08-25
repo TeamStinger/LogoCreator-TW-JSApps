@@ -3,6 +3,7 @@ require.config({
         'jquery': 'lib/jquery',
         'jqueryUI': 'lib/jquery-ui',
         'text': 'lib/text',
+        'handlebars': 'lib/handlebars-v3.0.3',
         'views': '../views'
     }
 });
