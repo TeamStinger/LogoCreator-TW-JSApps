@@ -7,6 +7,6 @@ require.config({
     }
 });
 
-require(['controller/controller', 'jquery', 'jqueryUI', 'text'], function (controller) {
+require(['controllers/mainController', 'jquery', 'jqueryUI', 'text'], function (controller) {
     controller.init();
 });
