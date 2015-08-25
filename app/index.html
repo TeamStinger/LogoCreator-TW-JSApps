@@ -3,9 +3,9 @@
 <head lang="en">
     <meta charset="utf-8">
     <title>LogoCreator</title>
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
@@ -17,9 +17,9 @@
                 </ul>
 
                 <div ng-hide="logged" class="navbar-form navbar-right">
-                    <form id="loginForm" ng-submit="login()">
-                        <input type="text" placeholder="Username" ng-model="name" class="form-control" />
-                        <input type="password" placeholder="Passowrd" ng-model="password" class="form-control" />
+                    <form id="loginForm">
+                        <input type="text" placeholder="Username" class="form-control" />
+                        <input type="password" placeholder="Password" class="form-control" />
                         <button class="btn btn-default">Login</button>
                     </form>
                 </div>
@@ -43,6 +43,7 @@
         </strong></small>
     </footer>
 
+    <script src="scripts/lib/everlive.all.js"></script>
     <script src="scripts/lib/require.js" data-main="scripts/main"></script>
 </body>
 </html>
