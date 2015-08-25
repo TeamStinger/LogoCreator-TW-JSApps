@@ -8,11 +8,40 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 </head>
 <body>
-    <header>Header</header>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a href="#home" data-href="home">Home</a></li>
+                    <li><a href="#gallery" data-href="gallery">Gallery</a></li>
+                </ul>
 
-    <div id="view"></div>
+                <div ng-hide="logged" class="navbar-form navbar-right">
+                    <form id="loginForm" ng-submit="login()">
+                        <input type="text" placeholder="Username" ng-model="name" class="form-control" />
+                        <input type="password" placeholder="Passowrd" ng-model="password" class="form-control" />
+                        <button class="btn btn-default">Login</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <footer>Footer</footer>
+    <div class="container" id="view"></div>
+
+    <footer class="text-center footer">
+        <small><strong>Author:</strong> <a href="https://github.com/TeamStinger" target="_blank">Team Stinger</a></small>
+        <br>
+        <small>
+            <strong>
+                <a href="https://github.com/TeamStinger/LogoCreator-TW-JSApps" target="_blank">Open Source Project</a>
+            </strong>
+        </small>
+        <br>
+        <small><strong>
+            &copy; 2015
+        </strong></small>
+    </footer>
 
     <script src="scripts/lib/require.js" data-main="scripts/main"></script>
 </body>
