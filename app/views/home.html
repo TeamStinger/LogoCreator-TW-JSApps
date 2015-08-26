@@ -1,1 +1,35 @@
-Home view
+<form class="col-md-6 row form-horizontal" id="registerForm" method="post">
+    <fieldset class="form-group">
+        <label for="name" class="col-md-3 control-label">Username</label>
+        <p class="col-md-9">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
+        </p>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="password" class="col-md-3 control-label">Password</label>
+        <p class="col-md-9">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+        </p>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="displayName" class="col-md-3 control-label">Display Name</label>
+        <p class="col-md-9">
+            <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Display Name"/>
+        </p>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="email" class="col-md-3 control-label">Email</label>
+        <p class="col-md-9">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
+        </p>
+    </fieldset>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-10">
+            <button id="register" type="submit" class="btn btn-default">Register</button>
+        </div>
+    </div>
+</form>
