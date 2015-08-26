@@ -4,10 +4,21 @@ require.config({
         'jqueryUI': 'lib/jquery-ui',
         'text': 'lib/text',
         'handlebars': 'lib/handlebars-v3.0.3',
-        'views': '../views'
+        'views': '../views',
+        'CryptoJS': 'lib/crypto-core-min',
+        'CryptoJS.SHA1': 'lib/crypto-sha1-min'
+    },
+    shim: {
+        'CryptoJS': {
+            exports: 'CryptoJS'
+        },
+        'CryptoJS.SHA1': {
+            deps: ['CryptoJS'],
+            exports: 'CryptoJS.SHA1'
+        }
     }
 });
 
-require(['controllers/mainController', 'jquery', 'jqueryUI', 'text'], function (controller) {
+require(['controllers/mainController', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text'], function (controller) {
     controller.init();
 });
