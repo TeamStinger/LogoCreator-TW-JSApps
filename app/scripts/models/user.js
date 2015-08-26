@@ -7,6 +7,12 @@ define(function () {
                 DisplayName: userData.displayName,
                 Email: userData.email
             });
+        },
+
+        login: function (userData) {
+            var password = CryptoJS.SHA1(userData.password + userData.name).toString();
+
+            return Everlive.$.Authentication.login(userData.name, password);
         }
     };
 
