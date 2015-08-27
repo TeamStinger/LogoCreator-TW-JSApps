@@ -1,6 +1,7 @@
-define(['text!views/home.html', 'text!views/gallery.html', '../utils/viewRenderer', './homeController',
-        '../models/user', '../utils/storage'],
-    function (homeTemplate, galleryTemplate, viewRenderer, homeController,
+define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.html', 'text!views/createLogo.html',
+        '../utils/viewRenderer', './homeController', '../models/user', '../utils/storage'],
+    function (homeTemplate, galleryTemplate, myLogosTemplate, createLogoTemplate,
+              viewRenderer, homeController,
               user, storage) {
         var MainController = {
             init: function () {
@@ -12,6 +13,8 @@ define(['text!views/home.html', 'text!views/gallery.html', '../utils/viewRendere
 
                 $('#home').on('click', this.homeClick);
                 $('#gallery').on('click', this.galleryClick);
+                $('#myLogos').on('click', this.myLogosClick);
+                $('#createLogo').on('click', this.createLogoClick);
                 $('#loginForm').on('click', this.loginClick);
                 $('#logout-btn').on('click', this.logoutClick);
             },
@@ -27,6 +30,14 @@ define(['text!views/home.html', 'text!views/gallery.html', '../utils/viewRendere
                 viewRenderer.render('#view', galleryTemplate, {});
 
                 event.preventDefault();
+            },
+
+            myLogosClick: function () {
+                viewRenderer.render('#view', myLogosTemplate, {})
+            },
+
+            createLogoClick: function () {
+                viewRenderer.render('#view', createLogoTemplate, {})
             },
 
             loginClick: function (event) {
