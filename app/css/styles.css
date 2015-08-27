@@ -18,7 +18,17 @@ body {
     bottom: 0;
     width: 100%;
 }
+.gallery{
+    float: right;
+    margin: 10px;
+    width: 400px;
+    height: 400px;
+}
 
+.gallery-img{
+    width:90%;
+    max-height: 250px;
+}
 .footer a,
 .footer a:hover {
     color: #fff;
