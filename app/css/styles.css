@@ -27,3 +27,12 @@ body {
 .footer a:hover {
     text-decoration: underline;
 }
+
+#logout-btn {
+    display: none;
+}
+
+#display-name {
+    color: #9d9d9d;
+    margin-right: 10px;
+}
