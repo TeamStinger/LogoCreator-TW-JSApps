@@ -1,8 +1,8 @@
 define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.html', 'text!views/createLogo.html',
-        '../utils/viewRenderer', './homeController', '../models/user', '../utils/storage'],
+        '../utils/viewRenderer', './homeController', '../models/user', '../utils/storage', './galleryController'],
     function (homeTemplate, galleryTemplate, myLogosTemplate, createLogoTemplate,
               viewRenderer, homeController,
-              user, storage) {
+              user, storage, galleryController) {
         var MainController = {
             init: function () {
                 // TODO: Check if there is a logged in user
@@ -77,7 +77,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                     info: 'I made this logo using the best logo making website in the world!'
                 }]);
 
-
+                galleryController.attachHandlers();
                 event.preventDefault();
             },
 
