@@ -16,7 +16,7 @@
     {{#if this}}
         {{#each this}}
             <div class="col-md-4">
-                <div class="thumbnail gallery">
+                <div class="thumbnail">
                     <img src= '{{this.src}}' alt="logo" class="gallery-img">
 
                     <div class="caption">
@@ -26,6 +26,7 @@
 
                         <p>
                             <a href="#" class="btn btn-primary" role="button">Like</a>
+                            <a href="{{this.src}}" class="btn btn-primary" role="button" download>Download</a>
                         </p>
                     </div>
                 </div>
