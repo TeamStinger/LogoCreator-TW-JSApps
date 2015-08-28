@@ -1,13 +1,11 @@
-define(['jquery'], function(view){
-    var GalleryCtr = {
+define([], function(){
+    var GalleryController = {
         attachHandlers: function () {
             $('.dropdown').on('click', function () {
                 $('.dropdown-menu').toggle();
-
             });
-            console.log('test');
         }
     };
 
-    return GalleryCtr;
+    return GalleryController;
 });

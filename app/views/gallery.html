@@ -1,5 +1,6 @@
-<div class="dropdown" style ='z-index: 5'>
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+<div class="dropdown" style="z-index: 5">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
         Sort by
         <span class="caret"></span>
     </button>
@@ -11,29 +12,32 @@
         <li><a href="#">Logo rank</a></li>
     </ul>
 </div>
+
 <div class="sub-container">
-<div class="row">
-    {{#if this}}
+    <div class="row">
+        {{#if this}}
         {{#each this}}
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src= '{{this.src}}' alt="logo" class="gallery-img">
+        <div class="col-md-4">
+            <div class="thumbnail gallery">
+                <a href="{{this.src}}" data-lightbox="gallery" data-title="{{this.info}}">
+                    <img src='{{this.src}}' alt="logo" class="gallery-img">
+                </a>
 
-                    <div class="caption">
-                        <h3>{{this.author}}</h3>
+                <div class="caption">
+                    <h3>{{this.author}}</h3>
 
-                        <p>{{this.info}}</p>
+                    <p>{{this.info}}</p>
 
-                        <p>
-                            <a href="#" class="btn btn-primary" role="button">Like</a>
-                            <a href="{{this.src}}" class="btn btn-primary" role="button" download>Download</a>
-                        </p>
-                    </div>
+                    <p>
+                        <a href="#" class="btn btn-primary" role="button">Like</a>
+                        <a href="{{this.src}}" class="btn btn-primary" role="button">Download</a>
+                    </p>
                 </div>
             </div>
+        </div>
         {{/each}}
-    {{else}}
+        {{else}}
         <div>Cannot find files</div>
-    {{/if}}
+        {{/if}}
     </div>
 </div>

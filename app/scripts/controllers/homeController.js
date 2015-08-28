@@ -6,6 +6,7 @@ define(['../models/user'], function (user) {
             registerForm = $('#registerForm');
             registerForm.on('submit', this.submitRegister);
         },
+
         submitRegister: function (event) {
             var formData = $(this).serializeArray();
             var userData = {};

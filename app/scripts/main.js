@@ -6,7 +6,8 @@ require.config({
         'handlebars': 'lib/handlebars-v3.0.3',
         'views': '../views',
         'CryptoJS': 'lib/crypto-core-min',
-        'CryptoJS.SHA1': 'lib/crypto-sha1-min'
+        'CryptoJS.SHA1': 'lib/crypto-sha1-min',
+        'lightBox': './lib/lightbox.min'
     },
     shim: {
         'CryptoJS': {
@@ -19,6 +20,7 @@ require.config({
     }
 });
 
-require(['controllers/mainController', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text'], function (controller) {
+require(['controllers/mainController', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text', 'lightBox'],
+    function (controller) {
     controller.init();
 });
