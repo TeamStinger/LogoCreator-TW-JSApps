@@ -108,7 +108,16 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
 
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
-                        //Show error message
+                        noty({
+                            theme: 'relax',
+                            type: 'error',
+                            text: error.message,
+                            animation: {
+                                open: 'animated fadeIn',
+                                close: 'animated fadeOut'
+                            },
+                            timeout: 3500
+                        });
                     });
 
                 event.preventDefault();
@@ -120,7 +129,16 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                         storage.removeItem('loggedInUser');
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
-                        console.log(error)
+                        noty({
+                            theme: 'relax',
+                            type: 'error',
+                            text: error.message,
+                            animation: {
+                                open: 'animated fadeIn',
+                                close: 'animated fadeOut'
+                            },
+                            timeout: 3500
+                        });
                     });
 
                 event.preventDefault();
@@ -131,7 +149,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                 $('#gallery').on('click', this.galleryClick);
                 $('#myLogos').on('click', this.myLogosClick);
                 $('#createLogo').on('click', this.createLogoClick);
-                $('#loginForm').on('click', this.loginClick);
+                $('#loginForm').on('submit', this.loginClick);
                 $('#logout-btn').on('click', this.logoutClick);
             },
 

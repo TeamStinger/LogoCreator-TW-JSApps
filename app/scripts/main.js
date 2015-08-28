@@ -7,7 +7,8 @@ require.config({
         'views': '../views',
         'CryptoJS': 'lib/crypto-core-min',
         'CryptoJS.SHA1': 'lib/crypto-sha1-min',
-        'lightBox': './lib/lightbox.min'
+        'lightBox': 'lib/lightbox.min',
+        'noty': 'lib/jquery.noty.packaged.min'
     },
     shim: {
         'CryptoJS': {
@@ -20,7 +21,7 @@ require.config({
     }
 });
 
-require(['controllers/mainController', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text', 'lightBox'],
+require(['controllers/mainController', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text', 'lightBox', 'noty'],
     function (controller) {
     controller.init();
 });

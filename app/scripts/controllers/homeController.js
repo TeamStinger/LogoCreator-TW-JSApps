@@ -1,9 +1,7 @@
 define(['../models/user'], function (user) {
-    var registerForm;
-
     var HomeController = {
         attachHandlers: function () {
-            registerForm = $('#registerForm');
+            var registerForm = $('#registerForm');
             registerForm.on('submit', this.submitRegister);
         },
 
@@ -17,11 +15,29 @@ define(['../models/user'], function (user) {
 
             user.register(userData)
                 .then(function (data) {
-                    registerForm.hide();
-                    //Show successful registered user message
-                }, function (err) {
-                    //Show error message
-                    console.log(err);
+                    $('#registerPanel').hide();
+
+                    noty({
+                        theme: 'relax',
+                        type: 'success',
+                        text: 'You are successfully registered!',
+                        animation: {
+                            open: 'animated fadeIn',
+                            close: 'animated fadeOut'
+                        },
+                        timeout: 3500
+                    });
+                }, function (error) {
+                    noty({
+                        theme: 'relax',
+                        type: 'error',
+                        text: error.message,
+                        animation: {
+                            open: 'animated fadeIn',
+                            close: 'animated fadeOut'
+                        },
+                        timeout: 3500
+                    });
                 });
 
             event.preventDefault();
