@@ -1,12 +1,16 @@
 define(['kendo'], function (kendo) {
     var preview,
         textPreview,
-        id;
+        id,
+        imagePreview,
+        itemList;
 
     var CreateLogoController = {
         init: function () {
             preview = $('#preview');
             textPreview = $('#textPreviewer');
+            imagePreview=$('#imagePreviewer');
+            itemList=$('#item-list');
             id=0;
 
             CreateLogoController.createTabStrip();
@@ -15,6 +19,7 @@ define(['kendo'], function (kendo) {
             CreateLogoController.createFontSizeNumeric();
             CreateLogoController.createLogoTextColorPicker();
             CreateLogoController.attachAddTextHandler();
+            CreateLogoController.attachAddImgHandler()
         },
 
         createTabStrip: function () {
@@ -78,6 +83,10 @@ define(['kendo'], function (kendo) {
             $('#addText').on('click', CreateLogoController.addTextClick);
         },
 
+        attachAddImgHandler: function () {
+            $('#addImage').on('click', CreateLogoController.addImageClick);
+        },
+
         changeBackgroundColor: function (event) {
             preview.css('background-color', event.value);
         },
@@ -96,7 +105,6 @@ define(['kendo'], function (kendo) {
 
         addTextClick: function (event) {
             var text = $('#text');
-            var itemList=$('#item-list');
 
 
             var textItem=$('<p>')
@@ -121,6 +129,34 @@ define(['kendo'], function (kendo) {
                 .appendTo(itemList);
 
             event.preventDefault();
+        },
+
+        addImageClick: function (event) {
+
+
+            var image=$('<p>')
+                .addClass('item')
+                .css({
+                    display: 'inline-block'
+                })
+                .draggable({
+                    containment: '#preview'
+                })
+                .html('picture')
+                .attr('id', id++)
+                .appendTo(imagePreview);
+            //textPreview.text(text.val());
+            var imageItem=$('<p>')
+                .addClass('item')
+                .css({
+                    display: 'block'
+                })
+                .html("Image: picture"+(id-1))
+                .attr('id', 'item-'+(id-1))
+                .appendTo(itemList);
+
+            event.preventDefault();
+
         },
 
         changeFontColor: function (event) {
