@@ -69,6 +69,11 @@ h1 {
 }
 
 .preview-logo {
-    height: 400px;
+    background: rgb(217, 89, 89);
+    width: 250px;
+    height: 250px;
+}
+
+.k-slider {
     width: 100%;
 }
