@@ -1,4 +1,4 @@
-define(['../models/user'], function (user) {
+define(['../models/user', '../utils/notifier'], function (user, notifier) {
     var HomeController = {
         attachHandlers: function () {
             var registerForm = $('#registerForm');
@@ -16,28 +16,9 @@ define(['../models/user'], function (user) {
             user.register(userData)
                 .then(function (data) {
                     $('#registerPanel').hide();
-
-                    noty({
-                        theme: 'relax',
-                        type: 'success',
-                        text: 'You are successfully registered!',
-                        animation: {
-                            open: 'animated fadeIn',
-                            close: 'animated fadeOut'
-                        },
-                        timeout: 3500
-                    });
+                    notifier.showSuccessMessage('You are successfully registered!');
                 }, function (error) {
-                    noty({
-                        theme: 'relax',
-                        type: 'error',
-                        text: error.message,
-                        animation: {
-                            open: 'animated fadeIn',
-                            close: 'animated fadeOut'
-                        },
-                        timeout: 3500
-                    });
+                    notifier.showErrorMessage(error.message);
                 });
 
             event.preventDefault();

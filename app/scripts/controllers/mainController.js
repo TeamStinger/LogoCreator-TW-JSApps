@@ -1,8 +1,9 @@
 define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.html', 'text!views/createLogo.html',
-        '../utils/viewRenderer', './homeController', '../models/user', '../utils/storage', './galleryController'],
+        '../utils/viewRenderer', './homeController', '../models/user', '../utils/storage', './galleryController',
+        '../utils/notifier'],
     function (homeTemplate, galleryTemplate, myLogosTemplate, createLogoTemplate,
-              viewRenderer, homeController,
-              user, storage, galleryController) {
+              viewRenderer, homeController, user, storage, galleryController,
+              notifier) {
         var testArray = [{
             author: 'GitMan',
             src: 'https://git-scm.com/images/logos/downloads/Git-Logo-Black.png',
@@ -108,16 +109,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
 
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
-                        noty({
-                            theme: 'relax',
-                            type: 'error',
-                            text: error.message,
-                            animation: {
-                                open: 'animated fadeIn',
-                                close: 'animated fadeOut'
-                            },
-                            timeout: 3500
-                        });
+                        notifier.showErrorMessage(error.message);
                     });
 
                 event.preventDefault();
@@ -129,16 +121,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                         storage.removeItem('loggedInUser');
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
-                        noty({
-                            theme: 'relax',
-                            type: 'error',
-                            text: error.message,
-                            animation: {
-                                open: 'animated fadeIn',
-                                close: 'animated fadeOut'
-                            },
-                            timeout: 3500
-                        });
+                        notifier.showErrorMessage(error.message);
                     });
 
                 event.preventDefault();
