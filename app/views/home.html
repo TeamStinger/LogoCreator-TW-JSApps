@@ -1,35 +1,59 @@
-<form class="col-md-6 row form-horizontal" id="registerForm" method="post">
-    <fieldset class="form-group">
-        <label for="name" class="col-md-3 control-label">Username</label>
-        <p class="col-md-9">
-            <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
-        </p>
-    </fieldset>
-
-    <fieldset class="form-group">
-        <label for="password" class="col-md-3 control-label">Password</label>
-        <p class="col-md-9">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
-        </p>
-    </fieldset>
-
-    <fieldset class="form-group">
-        <label for="displayName" class="col-md-3 control-label">Display Name</label>
-        <p class="col-md-9">
-            <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Display Name"/>
-        </p>
-    </fieldset>
-
-    <fieldset class="form-group">
-        <label for="email" class="col-md-3 control-label">Email</label>
-        <p class="col-md-9">
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
-        </p>
-    </fieldset>
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-10">
-            <button id="register" type="submit" class="btn btn-default">Register</button>
+<div class="row">
+    <div class="col-md-6">
+        <div class="jumbotron">
+            <h1>Welcome to Logo Creator!</h1>
+            <p>
+                You need a fascinating logo to reveal the face of your company in front of the world?
+                Our free Do-It-Yourself logo creator gives you the opportunity to build professional looking logo
+                design in just a few easy steps!
+            </p>
+            <p>Have fun and rediscover the artist within you!</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
         </div>
     </div>
-</form>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Register form</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" id="registerForm" method="post">
+                    <fieldset class="form-group">
+                        <label for="name" class="col-md-3 control-label">Username</label>
+                        <p class="col-md-9">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="password" class="col-md-3 control-label">Password</label>
+                        <p class="col-md-9">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="displayName" class="col-md-3 control-label">Display Name</label>
+                        <p class="col-md-9">
+                            <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Display Name"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="email" class="col-md-3 control-label">Email</label>
+                        <p class="col-md-9">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
+                        </p>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-10">
+                            <button id="register" type="submit" class="btn btn-default">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

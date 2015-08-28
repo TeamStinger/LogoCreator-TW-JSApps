@@ -74,20 +74,24 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                 event.preventDefault();
             },
 
-            myLogosClick: function () {
+            myLogosClick: function (event) {
                 var loggedInUser = storage.getItem('loggedInUser');
 
                 viewRenderer.render('#view', myLogosTemplate, {
                     isLoggedInUser: loggedInUser
                 });
+
+                event.preventDefault();
             },
 
-            createLogoClick: function () {
+            createLogoClick: function (event) {
                 var loggedInUser = storage.getItem('loggedInUser');
 
                 viewRenderer.render('#view', createLogoTemplate, {
                     isLoggedInUser: loggedInUser
                 });
+
+                event.preventDefault();
             },
 
             loginClick: function (event) {

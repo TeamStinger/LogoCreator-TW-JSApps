@@ -46,3 +46,7 @@ body {
 .dropdown {
     margin-bottom: 15px;
 }
+
+h1 {
+   margin-top: 0;
+}
