@@ -1,1 +1,5 @@
-My logos view
+{{#if isLoggedInUser}}
+    My Logos View
+{{else}}
+    <div class="alert alert-danger" role="alert">Only registered users can see their logos!</div>
+{{/if}}

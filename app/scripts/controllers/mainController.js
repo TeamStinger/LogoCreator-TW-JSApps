@@ -75,11 +75,19 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
             },
 
             myLogosClick: function () {
-                viewRenderer.render('#view', myLogosTemplate, {})
+                var loggedInUser = storage.getItem('loggedInUser');
+
+                viewRenderer.render('#view', myLogosTemplate, {
+                    isLoggedInUser: loggedInUser
+                });
             },
 
             createLogoClick: function () {
-                viewRenderer.render('#view', createLogoTemplate, {})
+                var loggedInUser = storage.getItem('loggedInUser');
+
+                viewRenderer.render('#view', createLogoTemplate, {
+                    isLoggedInUser: loggedInUser
+                });
             },
 
             loginClick: function (event) {
@@ -108,9 +116,9 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
             logoutClick: function () {
                 user.logout()
                     .then(function (data) {
-                        MainController.showLoginForm();
-
                         storage.removeItem('loggedInUser');
+                        MainController.showLoginForm();
+                        MainController.renderPageByUserAuthentication();
                     }, function (error) {
                         console.log(error)
                     });
