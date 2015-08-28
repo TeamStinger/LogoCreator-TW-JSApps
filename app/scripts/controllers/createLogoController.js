@@ -1,11 +1,13 @@
 define(['kendo'], function (kendo) {
     var preview,
-        textPreview;
+        textPreview,
+        id;
 
     var CreateLogoController = {
         init: function () {
             preview = $('#preview');
-            textPreview = $('#textPreview');
+            textPreview = $('#textPreviewer');
+            id=0;
 
             CreateLogoController.createTabStrip();
             CreateLogoController.createColorPicker();
@@ -94,7 +96,29 @@ define(['kendo'], function (kendo) {
 
         addTextClick: function (event) {
             var text = $('#text');
-            textPreview.text(text.val());
+            var itemList=$('#item-list');
+
+
+            var textItem=$('<p>')
+                .addClass('item')
+                .css({
+                    display: 'inline-block'
+                })
+                .draggable({
+                    containment: '#preview'
+                })
+                .html(text.val())
+                .attr('id', id++)
+                .appendTo(textPreview);
+            //textPreview.text(text.val());
+            var textItem=$('<p>')
+                .addClass('item')
+                .css({
+                    display: 'block'
+                })
+                .html("Text: '"+text.val()+"'")
+                .attr('id', 'item-'+(id-1))
+                .appendTo(itemList);
 
             event.preventDefault();
         },

@@ -1,8 +1,10 @@
 {{#if isLoggedInUser}}
     <div class="row">
         <div class="col-md-6">
-            <div id="preview" class="preview-logo">
-                <p id="textPreview" class="textPreview"></p>
+            <div id="preview" class="preview-logo background-layer">
+               <!-- <p id="textPreview" class="textPreview text-layer"></p>-->
+                <div id="textPreviewer" class="textPreview"></div>
+                <div id="imagePreviewer"></div>
             </div>
         </div>
         <div class="col-md-6">
@@ -12,6 +14,7 @@
                     <li>Background</li>
                     <li>Images</li>
                     <li>Text</li>
+                    <li>Item List</li>
                 </ul>
                 <div id="sizeTab">
                     <h3>Width</h3>
@@ -50,6 +53,11 @@
                         <input id="changeFontColor" />
                     </p>
                     <button class="btn btn-primary" id="addText">Add text</button>
+                </div>
+
+                <div id="listTab">
+                    <h3>Item List</h3>
+                    <div id="item-list"></div>
                 </div>
             </div>
         </div>
