@@ -19,17 +19,13 @@ define(function () {
             return Everlive.$.Authentication.logout();
         },
 
-        getName: function () {
-            return Everlive.$.Users.currentUser()
-                .then(function (data) {
-                    var currentUser = data,
-                        displayName = currentUser.result.DisplayName;
+        restoreAuthorization: function (loggedInUser) {
+            Everlive.$.Authentication.setAuthorization(loggedInUser.access_token,
+                loggedInUser.token_type, loggedInUser.principal_id);
+        },
 
-                    return displayName;
-                },
-                function (error) {
-                    return error;
-                });
+        getCurrentUser: function () {
+            return Everlive.$.Users.currentUser();
         }
     };
 
