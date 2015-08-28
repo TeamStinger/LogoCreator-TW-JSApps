@@ -1,46 +1,48 @@
 define([], function () {
     var GalleryController = {
         attachHandlers: function () {
-            $('#dropdownMenu1').on('click', function () {
-                $('#dropdown-menu-sort').toggle();
-            });
+            $('#dropdownMenu1').on('click', GalleryController.sortMenuClick);
+            $('#dropdownMenu2').on('click', GalleryController.categoryMenuClick);
+            $('#grid-btn').on('click', GalleryController.gridButtonClick);
+        },
 
-            $('#grid-btn').on('click', function () {
-                var $btn = $(this),
-                    $btnIcon = $btn.children().first(),
-                    $logos = $('.logos'),
-                    $logoContainers = $('.thumbnail'),
-                    $logosContent = $('.caption');
+        sortMenuClick: function () {
+            $('#dropdown-menu-sort').toggle();
+        },
 
+        categoryMenuClick: function () {
+            $('#dropdown-menu-category').toggle();
+        },
 
-                if ($btnIcon.hasClass('glyphicon-th')) {
-                    $btnIcon.removeClass('glyphicon-th');
-                    $btnIcon.addClass('glyphicon-th-list');
+        gridButtonClick: function () {
+            var $btn = $(this),
+                $btnIcon = $btn.children().first(),
+                $logos = $('.logos'),
+                $logoContainers = $('.thumbnail'),
+                $logosContent = $('.caption');
 
-                    $logos.removeClass('col-md-4');
-                    $logos.addClass('col-md-12');
+            if ($btnIcon.hasClass('glyphicon-th')) {
+                $btnIcon.removeClass('glyphicon-th');
+                $btnIcon.addClass('glyphicon-th-list');
 
-                    $logoContainers.removeClass('gallery-img-container-gridview');
+                $logos.removeClass('col-md-4');
+                $logos.addClass('col-md-12');
 
-                    $logosContent.removeClass('gallery-content-gridview');
+                $logoContainers.removeClass('gallery-img-container-gridview');
 
-                } else {
-                    $btnIcon.removeClass('glyphicon-th-list');
-                    $btnIcon.addClass('glyphicon-th');
+                $logosContent.removeClass('gallery-content-gridview');
 
-                    $logos.removeClass('col-md-12');
-                    $logos.addClass('col-md-4');
+            } else {
+                $btnIcon.removeClass('glyphicon-th-list');
+                $btnIcon.addClass('glyphicon-th');
 
-                    $logoContainers.addClass('gallery-img-container-gridview');
+                $logos.removeClass('col-md-12');
+                $logos.addClass('col-md-4');
 
-                    $logosContent.addClass('gallery-content-gridview');
-                }
+                $logoContainers.addClass('gallery-img-container-gridview');
 
-            });
-
-            $('#dropdownMenu2').on('click', function () {
-                $('#dropdown-menu-category').toggle();
-            });
+                $logosContent.addClass('gallery-content-gridview');
+            }
         }
     };
 
