@@ -20,8 +20,25 @@ body {
 }
 
 .thumbnail .gallery-img {
-    width: 100%;
-    height: 250px;
+    width: auto;
+    height: auto;
+    max-width: 90%;
+    max-height: 55%;
+}
+
+.gallery-img-container-gridview{
+    width:350px;
+    height: 350px;
+}
+
+.gallery-img-container-listview{
+    width:auto;
+    height: 350px;
+}
+
+.gallery-content-gridview{
+    position: absolute;
+    bottom: 10px;
 }
 
 .footer a,

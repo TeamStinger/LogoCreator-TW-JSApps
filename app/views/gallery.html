@@ -46,12 +46,12 @@
         {{#if this}}
         {{#each this}}
         <div class="col-md-4 logos">
-            <div class="thumbnail gallery">
+            <div class="thumbnail gallery gallery-img-container-gridview">
                 <a href="{{this.src}}" data-lightbox="gallery" data-title="{{this.info}}">
                     <img src='{{this.src}}' alt="logo" class="gallery-img">
                 </a>
 
-                <div class="caption">
+                <div class="caption text gallery-content">
                     <h3>{{this.author}}</h3>
 
                     <p>{{this.info}}</p>

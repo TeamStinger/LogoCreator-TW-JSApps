@@ -7,20 +7,33 @@ define([], function () {
 
             $('#grid-btn').on('click', function () {
                 var $btn = $(this),
-                    $icon = $btn.children().first(),
-                    $logos = $('.logos');
+                    $btnIcon = $btn.children().first(),
+                    $logos = $('.logos'),
+                    $logoContainers = $('.thumbnail'),
+                    $logosContent = $('.caption');
 
-                if ($icon.hasClass('glyphicon-th')) {
-                    $icon.removeClass('glyphicon-th');
-                    $icon.addClass('glyphicon-th-list');
+
+                if ($btnIcon.hasClass('glyphicon-th')) {
+                    $btnIcon.removeClass('glyphicon-th');
+                    $btnIcon.addClass('glyphicon-th-list');
+
                     $logos.removeClass('col-md-4');
                     $logos.addClass('col-md-12');
 
+                    $logoContainers.removeClass('gallery-img-container-gridview');
+
+                    $logosContent.removeClass('gallery-content-gridview');
+
                 } else {
-                    $icon.removeClass('glyphicon-th-list');
-                    $icon.addClass('glyphicon-th');
+                    $btnIcon.removeClass('glyphicon-th-list');
+                    $btnIcon.addClass('glyphicon-th');
+
                     $logos.removeClass('col-md-12');
                     $logos.addClass('col-md-4');
+
+                    $logoContainers.addClass('gallery-img-container-gridview');
+
+                    $logosContent.addClass('gallery-content-gridview');
                 }
 
             });
