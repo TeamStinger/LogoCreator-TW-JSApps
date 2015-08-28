@@ -2,17 +2,23 @@
     <div class="col-md-6">
         <div class="jumbotron">
             <h1>Welcome to Logo Creator!</h1>
+
             <p>
                 You need a fascinating logo to reveal the face of your company in front of the world?
                 Our free Do-It-Yourself logo creator gives you the opportunity to build professional looking logo
                 design in just a few easy steps!
             </p>
+
             <p>Have fun and rediscover the artist within you!</p>
+
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
         </div>
     </div>
 
-    <div class="col-md-6">
+    {{#if isLoggedInUser}}
+    Show steps how to create a logo
+    {{else}}
+    <div class="col-md-6" id="registerPanel">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Register form</h3>
@@ -21,6 +27,7 @@
                 <form class="form-horizontal" id="registerForm" method="post">
                     <fieldset class="form-group">
                         <label for="name" class="col-md-3 control-label">Username</label>
+
                         <p class="col-md-9">
                             <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
                         </p>
@@ -28,20 +35,25 @@
 
                     <fieldset class="form-group">
                         <label for="password" class="col-md-3 control-label">Password</label>
+
                         <p class="col-md-9">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Password"/>
                         </p>
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label for="displayName" class="col-md-3 control-label">Display Name</label>
+
                         <p class="col-md-9">
-                            <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Display Name"/>
+                            <input type="text" id="displayName" name="displayName" class="form-control"
+                                   placeholder="Display Name"/>
                         </p>
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label for="email" class="col-md-3 control-label">Email</label>
+
                         <p class="col-md-9">
                             <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
                         </p>
@@ -56,4 +68,5 @@
             </div>
         </div>
     </div>
+    {{/if}}
 </div>

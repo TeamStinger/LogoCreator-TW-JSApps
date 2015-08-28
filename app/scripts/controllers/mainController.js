@@ -102,14 +102,11 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                     userData[obj.name] = obj.value;
                 });
 
-
                 user.login(userData)
                     .then(function (data) {
-                        viewRenderer.render('#view', galleryTemplate, testArray);
-
-                        MainController.hideLoginForm();
-
                         storage.setItem('loggedInUser', data.result);
+
+                        MainController.renderPageByUserAuthentication();
                     }, function (error) {
                         //Show error message
                     });
@@ -121,7 +118,6 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                 user.logout()
                     .then(function (data) {
                         storage.removeItem('loggedInUser');
-                        MainController.showLoginForm();
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
                         console.log(error)
@@ -142,14 +138,15 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
             renderPageByUserAuthentication: function () {
                 var loggedInUser = storage.getItem('loggedInUser');
 
+                viewRenderer.render('#view', homeTemplate, {
+                    isLoggedInUser: loggedInUser
+                });
+
                 if (loggedInUser) {
                     user.restoreAuthorization(loggedInUser);
-
-                    viewRenderer.render('#view', galleryTemplate, testArray);
                     MainController.hideLoginForm();
-                    galleryController.attachHandlers();
                 } else {
-                    viewRenderer.render('#view', homeTemplate, {});
+                    MainController.showLoginForm();
                     homeController.attachHandlers();
                 }
             },
