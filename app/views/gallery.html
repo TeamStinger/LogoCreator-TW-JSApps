@@ -1,23 +1,51 @@
-<div class="dropdown" style="z-index: 5">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="true">
-        Sort by
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">Name of author</a></li>
-        <li><a href="#">Name of logo</a></li>
-        <li><a href="#">Latest additions</a></li>
-        <li><a href="#">Oldest additions</a></li>
-        <li><a href="#">Logo rank</a></li>
-    </ul>
+<div class="row">
+    <div class="col-md-1">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                Sort by
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="dropdown-menu-sort" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Name of author</a></li>
+                <li><a href="#">Name of logo</a></li>
+                <li><a href="#">Latest additions</a></li>
+                <li><a href="#">Oldest additions</a></li>
+                <li><a href="#">Logo rank</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-10">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                Category
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="dropdown-menu-category" aria-labelledby="dropdownMenu2">
+                <li><a href="#">Something</a></li>
+                <li><a href="#">Some other thing</a></li>
+                <li><a href="#">Banana</a></li>
+                <li><a href="#">Can logos have categories?</a></li>
+                <li><a href="#">Testestestestest</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-1 text-right">
+        <button class="btn btn-default" type="button" id="grid-btn">
+            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+        </button>
+    </div>
 </div>
+
 
 <div class="sub-container">
     <div class="row">
         {{#if this}}
         {{#each this}}
-        <div class="col-md-4">
+        <div class="col-md-4 logos">
             <div class="thumbnail gallery">
                 <a href="{{this.src}}" data-lightbox="gallery" data-title="{{this.info}}">
                     <img src='{{this.src}}' alt="logo" class="gallery-img">
