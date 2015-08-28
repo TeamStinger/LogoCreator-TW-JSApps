@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6">
             <div id="preview" class="preview-logo">
-
+                <p id="textPreview" class="textPreview"></p>
             </div>
         </div>
         <div class="col-md-6">
@@ -16,17 +16,18 @@
                 <div id="sizeTab">
                     <h3>Width</h3>
                     <br />
-                    <div id="width"></div>
+                    <input id="width" />
                     <br/><br/><br/>
 
                     <h3>Height</h3>
                     <br />
-                    <div id="height"></div>
+                    <input id="height" />
                     <br /><br /><br />
                 </div>
 
                 <div id="backroundTab">
-                    <div id="background"></div>
+                    <h3>Change Background</h3>
+                    <div id="background" />
                 </div>
 
                 <div id="imagesTab">
@@ -34,7 +35,21 @@
                 </div>
 
                 <div id="textTab">
+                    <h3>Type Text</h3>
+                    <p>
+                        <input type="text" class="form-control border-box" id="text" />
+                    </p>
 
+                    <h3>Change font-size</h3>
+                    <p>
+                        <input id="changeFont" />
+                    </p>
+
+                    <h3>Change font-color</h3>
+                    <p>
+                        <input id="changeFontColor" />
+                    </p>
+                    <button class="btn btn-primary" id="addText">Add text</button>
                 </div>
             </div>
         </div>

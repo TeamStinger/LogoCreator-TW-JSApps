@@ -74,6 +74,15 @@ h1 {
     height: 250px;
 }
 
+.textPreview {
+    font-size: 16px;
+    color: #fff;
+}
+
 .k-slider {
     width: 100%;
+}
+
+.border-box {
+    box-sizing: border-box;
 }
