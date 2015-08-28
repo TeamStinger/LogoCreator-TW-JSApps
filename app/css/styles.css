@@ -67,3 +67,8 @@ body {
 h1 {
    margin-top: 0;
 }
+
+.preview-logo {
+    height: 400px;
+    width: 100%;
+}
