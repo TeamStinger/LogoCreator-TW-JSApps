@@ -16,7 +16,7 @@ define(['kendo'], function (kendo) {
             CreateLogoController.createTabStrip();
             CreateLogoController.createColorPicker();
             CreateLogoController.createSizeSliders();
-            CreateLogoController.createFontSizeNumeric();
+            CreateLogoController.createFontSizeNumeric('#changeFont');
             CreateLogoController.createLogoTextColorPicker('#changeFontColor');
             CreateLogoController.attachAddTextHandler();
             CreateLogoController.attachAddImgHandler();
@@ -61,8 +61,8 @@ define(['kendo'], function (kendo) {
             });
         },
 
-        createFontSizeNumeric: function () {
-            $('#changeFont').kendoNumericTextBox({
+        createFontSizeNumeric: function (selector) {
+            $(selector).kendoNumericTextBox({
                 format: '#px',
                 min: 10,
                 max: 40,
@@ -71,6 +71,16 @@ define(['kendo'], function (kendo) {
                 spin: CreateLogoController.changeFontSize
             });
         },
+       /* createFontSizeNumeric: function () {
+            $('#changeFont').kendoNumericTextBox({
+                format: '#px',
+                min: 10,
+                max: 40,
+                step: 1,
+                value: 16,
+                spin: CreateLogoController.changeFontSize
+            });
+        },*/
 
         createLogoTextColorPicker: function (selector) {
             $(selector).kendoColorPicker({
@@ -80,21 +90,6 @@ define(['kendo'], function (kendo) {
             });
         },
 
-        /*createLogoTextColorPicker: function () {
-            $('#changeFontColor').kendoColorPicker({
-                value: '#ffffff',
-                buttons: false,
-                select: CreateLogoController.changeFontColor
-            });
-        },*/
-
-        /*createLogoTextColorPickerPopOut: function () {
-            $('#changeFontColorPopOut').kendoColorPicker({
-                value: '#ffffff',
-                buttons: false,
-                select: CreateLogoController.changeFontColor
-            });
-        },*/
 
         attachAddTextHandler: function () {
             $('#addText').on('click', CreateLogoController.addTextClick);
@@ -186,12 +181,36 @@ define(['kendo'], function (kendo) {
             if(that.hasClass('item')){
                 var previewItemId=that.attr('data-id');
 
-                var popOutMenu=$('<div>')
-                    .html('<h3>Change font-size</h3><p><input id="changeFont" /></p><h3>Change font-color</h3>' +
-                    '<p><input id="changeFontColorPopOut" /></p>' +
-                    '<button class="btn btn-primary" id="addText">EditText</button>');
+                var popOutMenu=$('<div>');
+
+
+                //re use text tab as popuot menu
+                var body=$('#textTab');
+
+                popOutMenu
+                    .html(' <h3>Type Text</h3><p><input type="text" class="form-control border-box" id="text-popOut" /></p>' +
+                    '<h3>Change font-size</h3><p><input id="changeFont-popOut" /></p><h3>Change font-color</h3>' +
+                    '<p><input id="changeFontColor-popOut" /></p>' +
+                    '<button class="btn btn-primary" id="edit-text">EditText</button>');
+
                 popOutMenu.dialog();
-                CreateLogoController.createLogoTextColorPickerPopOut('#changeFontColorPopOut');
+
+                var button=$('#edit-text')
+                    .on('click',function(){
+                        var item=$('#'+previewItemId);
+
+                        item.html($('#text-popOut').val());
+                        item.css({
+                            color: $('#changeFontColor-popOut').val(),
+                            fontSize: $('#changeFont-popOut').val()
+                        })
+
+                        popOutMenu.dialog('close');
+                    });
+
+
+                CreateLogoController.createLogoTextColorPicker('#changeFontColor-popOut');
+                CreateLogoController.createFontSizeNumeric('#changeFont-popOut');
 
 
                 console.log(previewItemId);
