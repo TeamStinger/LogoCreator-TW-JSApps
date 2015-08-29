@@ -34,6 +34,11 @@ body {
     max-height: 90%;
 }
 
+.buttons{
+    position: absolute;
+    bottom: 25px;
+}
+
 .gallery-img-container-gridview {
     width: 350px;
     height: 350px;
@@ -47,7 +52,7 @@ body {
 .gallery-content-gridview {
     position: absolute;
     width: 90%;
-    bottom: 10px;
+    top: 50%;
 }
 
 .gallery-content-listview {
@@ -59,7 +64,6 @@ body {
 .gallery-content-listview p:first-of-type {
     font-size: 18px;
     margin-top: 20px;
-    margin-bottom: 170px;
     word-wrap: break-word;
 }
 
