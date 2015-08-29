@@ -178,6 +178,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 });
 
                 CreateLogoController.makeDraggable('#' + imageId, '#preview');
+                selectedPreviewImage = $("#" + imageId);
 
                 id++;
 
