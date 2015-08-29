@@ -46,18 +46,25 @@ body {
 
 .gallery-content-gridview {
     position: absolute;
+    width: 90%;
     bottom: 10px;
 }
 
 .gallery-content-listview {
     position: absolute;
+    width: 30%;
     top: 10%;
 }
 
-.gallery-content-listview p {
+.gallery-content-listview p:first-of-type {
     font-size: 18px;
     margin-top: 20px;
     margin-bottom: 170px;
+    word-wrap: break-word;
+}
+
+.gallery-content-gridview p:first-of-type {
+    word-wrap: break-word;
 }
 
 .gallery-content-listview h3 {
