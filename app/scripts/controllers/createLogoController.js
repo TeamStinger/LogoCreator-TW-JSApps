@@ -1,5 +1,5 @@
-define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html', 'text!views/logoImage.html', 'text!views/itemList.html', '../models/logos', 'kendo'],
-    function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate, logoImageTemplate, itemListTemplate, logos) {
+define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html', 'text!views/imageGallery.html', 'text!views/itemList.html', '../models/logos', 'kendo'],
+    function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate, imageGalleryTemplate, itemListTemplate, logos) {
         var preview,
             id,
             textPreview,
@@ -22,10 +22,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 CreateLogoController.createLogoTextColorPicker();
                 CreateLogoController.createImageGallery();
                 CreateLogoController.createImageResizeSlider();
-                CreateLogoController.attachImagePreviewHandler();
-                CreateLogoController.attachAddTextHandler();
-                CreateLogoController.attachAddImageHandler();
-                CreateLogoController.attachDeleteHandler();
+                CreateLogoController.attachHandlers();
             },
 
             createTabStrip: function () {
@@ -86,7 +83,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             },
 
             createImageGallery: function () {
-                viewRenderer.render("#imageGallery", logoImageTemplate, logos);
+                viewRenderer.render("#imageGallery", imageGalleryTemplate, logos);
             },
 
             createImageResizeSlider: function () {
@@ -99,19 +96,10 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 });
             },
 
-            attachImagePreviewHandler: function () {
+            attachHandlers: function () {
                 imagePreview.on('click', 'img', CreateLogoController.imagePreviewClick);
-            },
-
-            attachAddTextHandler: function () {
                 $('#addText').on('click', CreateLogoController.addTextClick);
-            },
-
-            attachAddImageHandler: function () {
                 $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
-            },
-
-            attachDeleteHandler: function () {
                 $('#itemList').on('click', '.badge', CreateLogoController.deleteItemClick);
             },
 
@@ -162,7 +150,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
 
                 //Add text to the list
                 viewRenderer.appendToDOM('#itemList', itemListTemplate, {
-                    itemName: textId
+                    id: textId
                 });
 
                 CreateLogoController.makeDraggable('#' + textId, '#preview');
@@ -186,7 +174,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
 
                 //Add image to the list
                 viewRenderer.appendToDOM('#itemList', itemListTemplate, {
-                    itemName: imageId
+                    id: imageId
                 });
 
                 CreateLogoController.makeDraggable('#' + imageId, '#preview');

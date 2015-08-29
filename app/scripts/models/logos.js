@@ -108,5 +108,6 @@ define(function () {
         id: 36,
         src: 'images/icons/sprig2.svg'
     }];
+
     return logos;
 });
