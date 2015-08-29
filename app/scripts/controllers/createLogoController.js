@@ -235,8 +235,7 @@ define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function 
 
         changeFontColor: function (event) {
             textPreview.css('color', event.value);
-        }
-
+        },
 
         makeDraggable: function (selector, area) {
             $(selector).draggable({
