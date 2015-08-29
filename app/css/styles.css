@@ -71,6 +71,7 @@ h1 {
 .preview-logo {
     background-color: rgb(217, 89, 89);
     overflow: hidden;
+    position: relative;
     width: 250px;
     height: 250px;
 }
@@ -104,11 +105,21 @@ h1 {
 .textPreview span,
 .imagePreview img {
     cursor: move;
+    position: absolute;
 }
 
 .list-group-item > .badge {
     background: rgb(217, 89, 89);
     cursor: pointer;
+}
+
+.changeImageSizePanel {
+    margin-top: 15px;
+    display: none;
+}
+
+.changeImageSizePanel .k-slider {
+    width: 532px;
 }
 
 /*.fb-like {*/

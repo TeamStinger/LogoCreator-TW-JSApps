@@ -1,68 +1,83 @@
 {{#if isLoggedInUser}}
-    <div class="row">
-        <div class="col-md-6">
-            <div id="preview" class="preview-logo background-layer">
-                <p id="textPreviewer" class="textPreview"></p>
-                <div id="imagePreviewer" class="imagePreview"></div>
+<div class="row">
+    <div class="col-md-6">
+        <div id="preview" class="preview-logo background-layer">
+            <p id="textPreviewer" class="textPreview"></p>
+
+            <div id="imagePreviewer" class="imagePreview"></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="tabstrip">
+            <ul>
+                <li class="k-state-active">Logo Sizes</li>
+                <li>Background</li>
+                <li>Images</li>
+                <li>Text</li>
+                <li>Item List</li>
+            </ul>
+            <div id="sizeTab">
+                <h3>Width</h3>
+                <br/>
+                <input id="widthSlider"/>
+                <br/><br/><br/>
+
+                <h3>Height</h3>
+                <br/>
+                <input id="heightSlider"/>
+                <br/><br/><br/>
+            </div>
+
+            <div id="backroundTab">
+                <h3>Change Background</h3>
+
+                <div id="backgroundPicker"/>
+            </div>
+
+            <div id="imagesTab">
+                <h3>Image</h3>
+
+                <div id="imageGallery" class="row imageGallery"></div>
+            </div>
+
+            <div id="textTab">
+                <h3>Type Text</h3>
+
+                <p>
+                    <input type="text" class="form-control border-box" id="textInput"/>
+                </p>
+
+                <h3>Change font-size</h3>
+
+                <p>
+                    <input id="changeFontNumeric"/>
+                </p>
+
+                <h3>Change font-color</h3>
+
+                <p>
+                    <input id="changeFontColor"/>
+                </p>
+                <button class="btn btn-primary" id="addText">Add text</button>
+            </div>
+
+            <div id="listTab">
+                <h3>Item List</h3>
+                <ul class="list-group" id="itemList"></ul>
             </div>
         </div>
-        <div class="col-md-6">
-            <div id="tabstrip">
-                <ul>
-                    <li class="k-state-active">Logo Sizes</li>
-                    <li>Background</li>
-                    <li>Images</li>
-                    <li>Text</li>
-                    <li>Item List</li>
-                </ul>
-                <div id="sizeTab">
-                    <h3>Width</h3>
-                    <br />
-                    <input id="widthSlider" />
-                    <br/><br/><br/>
 
-                    <h3>Height</h3>
-                    <br />
-                    <input id="heightSlider" />
-                    <br /><br /><br />
-                </div>
-
-                <div id="backroundTab">
-                    <h3>Change Background</h3>
-                    <div id="backgroundPicker" />
-                </div>
-
-                <div id="imagesTab">
-                    <h3>Image</h3>
-
-                    <div id="imageGallery" class="row imageGallery"></div>
-                </div>
-
-                <div id="textTab">
-                    <h3>Type Text</h3>
-                    <p>
-                        <input type="text" class="form-control border-box" id="textInput" />
-                    </p>
-
-                    <h3>Change font-size</h3>
-                    <p>
-                        <input id="changeFontNumeric" />
-                    </p>
-
-                    <h3>Change font-color</h3>
-                    <p>
-                        <input id="changeFontColor" />
-                    </p>
-                    <button class="btn btn-primary" id="addText">Add text</button>
-                </div>
-
-                <div id="listTab">
-                    <h3>Item List</h3>
-                    <ul class="list-group" id="itemList"></ul>
-                </div>
+        <div class="panel panel-default changeImageSizePanel" id="changeImageSizePanel">
+            <div class="panel-heading">Change image size</div>
+            <div class="panel-body">
+                <h3>Image size</h3>
+                <br/>
+                <input id="imageResizeSlider" value="0"/>
+                <br /><br />
             </div>
         </div>
     </div>
+</div>
 {{else}}
-    <div class="alert alert-danger" role="alert">Only registered users can create logos!</div>
+<div class="alert alert-danger" role="alert">Only registered users can create logos!</div>
 {{/if}}

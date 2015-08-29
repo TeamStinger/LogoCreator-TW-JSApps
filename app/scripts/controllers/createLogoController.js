@@ -1,183 +1,217 @@
 define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html', 'text!views/logoImage.html', 'text!views/itemList.html', '../models/logos', 'kendo'],
     function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate, logoImageTemplate, itemListTemplate, logos) {
-    var preview,
-        id,
-        textPreview,
-        imagePreview,
-        itemList;
+        var preview,
+            id,
+            textPreview,
+            imagePreview,
+            itemList,
+            selectedPreviewImage;
 
-    var CreateLogoController = {
-        init: function () {
-            preview = $('#preview');
-            textPreview = $('#textPreviewer');
-            imagePreview = $('#imagePreviewer');
-            itemList = $('#itemList');
-            id = 0;
+        var CreateLogoController = {
+            init: function () {
+                preview = $('#preview');
+                textPreview = $('#textPreviewer');
+                imagePreview = $('#imagePreviewer');
+                itemList = $('#itemList');
+                id = 0;
 
-            CreateLogoController.createTabStrip();
-            CreateLogoController.createColorPicker();
-            CreateLogoController.createSizeSliders();
-            CreateLogoController.createFontSizeNumeric();
-            CreateLogoController.createLogoTextColorPicker();
-            CreateLogoController.createImageGallery();
-            CreateLogoController.attachAddTextHandler();
-            CreateLogoController.attachAddImageHandler();
-            CreateLogoController.attachDeleteHandler();
-        },
+                CreateLogoController.createTabStrip();
+                CreateLogoController.createColorPicker();
+                CreateLogoController.createSizeSliders();
+                CreateLogoController.createFontSizeNumeric();
+                CreateLogoController.createLogoTextColorPicker();
+                CreateLogoController.createImageGallery();
+                CreateLogoController.createImageResizeSlider();
+                CreateLogoController.attachImagePreviewHandler();
+                CreateLogoController.attachAddTextHandler();
+                CreateLogoController.attachAddImageHandler();
+                CreateLogoController.attachDeleteHandler();
+            },
 
-        createTabStrip: function () {
-            $('#tabstrip').kendoTabStrip({
-                animation: {
-                    open: {
-                        effects: 'fadeIn'
+            createTabStrip: function () {
+                $('#tabstrip').kendoTabStrip({
+                    animation: {
+                        open: {
+                            effects: 'fadeIn'
+                        }
                     }
-                }
-            });
-        },
+                });
+            },
 
-        createColorPicker: function () {
-            $('#backgroundPicker').kendoFlatColorPicker({
-                preview: false,
-                value: 'rgb(217, 89, 89)',
-                change: CreateLogoController.changeBackgroundColor
-            });
-        },
+            createColorPicker: function () {
+                $('#backgroundPicker').kendoFlatColorPicker({
+                    preview: false,
+                    value: 'rgb(217, 89, 89)',
+                    change: CreateLogoController.changeBackgroundColor
+                });
+            },
 
-        createSizeSliders: function () {
-            $('#widthSlider').kendoSlider({
-                min: 100,
-                max: 500,
-                value: 250,
-                smallStep: 10,
-                largeStep: 50,
-                slide: CreateLogoController.changeWidth
-            });
+            createSizeSliders: function () {
+                $('#widthSlider').kendoSlider({
+                    min: 100,
+                    max: 500,
+                    value: 250,
+                    smallStep: 10,
+                    largeStep: 50,
+                    slide: CreateLogoController.changeWidth
+                });
 
-            $('#heightSlider').kendoSlider({
-                min: 100,
-                max: 500,
-                value: 250,
-                smallStep: 10,
-                largeStep: 50,
-                slide: CreateLogoController.changeHeight
-            });
-        },
+                $('#heightSlider').kendoSlider({
+                    min: 100,
+                    max: 500,
+                    value: 250,
+                    smallStep: 10,
+                    largeStep: 50,
+                    slide: CreateLogoController.changeHeight
+                });
+            },
 
-        createFontSizeNumeric: function () {
-            $('#changeFontNumeric').kendoNumericTextBox({
-                format: '#px',
-                min: 10,
-                max: 40,
-                step: 1,
-                value: 16,
-                spin: CreateLogoController.changeFontSize
-            });
-        },
+            createFontSizeNumeric: function () {
+                $('#changeFontNumeric').kendoNumericTextBox({
+                    format: '#px',
+                    min: 10,
+                    max: 40,
+                    step: 1,
+                    value: 16,
+                    spin: CreateLogoController.changeFontSize
+                });
+            },
 
-        createLogoTextColorPicker: function () {
-            $('#changeFontColor').kendoColorPicker({
-                value: '#ffffff',
-                buttons: false,
-                select: CreateLogoController.changeFontColor
-            });
-        },
+            createLogoTextColorPicker: function () {
+                $('#changeFontColor').kendoColorPicker({
+                    value: '#ffffff',
+                    buttons: false,
+                    select: CreateLogoController.changeFontColor
+                });
+            },
 
-        createImageGallery: function () {
-            viewRenderer.render("#imageGallery", logoImageTemplate, logos);
-        },
+            createImageGallery: function () {
+                viewRenderer.render("#imageGallery", logoImageTemplate, logos);
+            },
 
-        attachAddTextHandler: function () {
-            $('#addText').on('click', CreateLogoController.addTextClick);
-        },
+            createImageResizeSlider: function () {
+                var slider = $("#imageResizeSlider").kendoSlider({
+                    min: 10,
+                    max: 460,
+                    smallStep: 10,
+                    largeStep: 50,
+                    slide: CreateLogoController.changeImageSize
+                });
+            },
 
-        attachAddImageHandler: function () {
-            $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
-        },
+            attachImagePreviewHandler: function () {
+                imagePreview.on('click', 'img', CreateLogoController.imagePreviewClick);
+            },
 
-        attachDeleteHandler: function () {
-            $('#itemList').on('click', '.badge', CreateLogoController.deleteItemClick);
-        },
+            attachAddTextHandler: function () {
+                $('#addText').on('click', CreateLogoController.addTextClick);
+            },
 
-        changeBackgroundColor: function (event) {
-            preview.css('background-color', event.value);
-        },
+            attachAddImageHandler: function () {
+                $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
+            },
 
-        changeWidth: function (event) {
-            preview.css('width', event.value);
-        },
+            attachDeleteHandler: function () {
+                $('#itemList').on('click', '.badge', CreateLogoController.deleteItemClick);
+            },
 
-        changeHeight: function (event) {
-            preview.css('height', event.value);
-        },
+            changeBackgroundColor: function (event) {
+                preview.css('background-color', event.value);
+            },
 
-        changeFontSize: function () {
-            textPreview.css('font-size', this.value());
-        },
+            changeWidth: function (event) {
+                preview.css('width', event.value);
+            },
 
-        changeFontColor: function (event) {
-            textPreview.css('color', event.value);
-        },
+            changeHeight: function (event) {
+                preview.css('height', event.value);
+            },
 
-        addTextClick: function (event) {
-            var textInput = $('#textInput'),
-                textId = 'text-' + id;
+            changeFontSize: function () {
+                textPreview.css('font-size', this.value());
+            },
 
-            //Add text to the preview
-            viewRenderer.appendToDOM('#textPreviewer', logoTextPreviewTemplate, {
-                id: textId,
-                text: textInput.val()
-            });
+            changeFontColor: function (event) {
+                textPreview.css('color', event.value);
+            },
 
-            //Add text to the list
-            viewRenderer.appendToDOM('#itemList', itemListTemplate, {
-                itemName: textId
-            });
+            changeImageSize: function (event) {
+                var size = event.value;
 
-            CreateLogoController.makeDraggable('#' + textId, '#preview');
+                $(selectedPreviewImage).css({
+                    width: size + 'px',
+                    height: size + 'px'
+                });
+            },
 
-            id++;
+            imagePreviewClick: function (event) {
+                selectedPreviewImage = event.target;
 
-            event.preventDefault();
-        },
+                event.preventDefault();
+            },
 
-        addImageClick: function (event) {
-            var imageSrc = event.currentTarget.href,
-                imageId = 'image-' + id;
+            addTextClick: function (event) {
+                var textInput = $('#textInput'),
+                    textId = 'text-' + id;
 
-            //Add image to the preview
-            viewRenderer.appendToDOM('#imagePreviewer', logoImagePreviewTemplate, {
-                id: imageId,
-                src: imageSrc
-            });
+                //Add text to the preview
+                viewRenderer.appendToDOM('#textPreviewer', logoTextPreviewTemplate, {
+                    id: textId,
+                    text: textInput.val()
+                });
 
-            //Add image to the list
-            viewRenderer.appendToDOM('#itemList', itemListTemplate, {
-                itemName: imageId
-            });
+                //Add text to the list
+                viewRenderer.appendToDOM('#itemList', itemListTemplate, {
+                    itemName: textId
+                });
 
-            CreateLogoController.makeDraggable('#' + imageId, '#preview');
+                CreateLogoController.makeDraggable('#' + textId, '#preview');
 
-            id++;
+                id++;
 
-            event.preventDefault();
-        },
+                event.preventDefault();
+            },
 
-        deleteItemClick: function (event) {
-            var deleteButton = $(event.target),
-                targetId = deleteButton.data('id');
+            addImageClick: function (event) {
+                var imageSrc = event.currentTarget.href,
+                    imageId = 'image-' + id;
 
-            deleteButton.parent('.list-group-item').remove();
-            $('#' + targetId).remove();
+                $('#changeImageSizePanel').show();
 
-            event.preventDefault();
-        },
+                //Add image to the preview
+                viewRenderer.appendToDOM('#imagePreviewer', logoImagePreviewTemplate, {
+                    id: imageId,
+                    src: imageSrc
+                });
 
-        makeDraggable: function (selector, container) {
-            $(selector).draggable({
-                containment: container
-            });
-        }
-    };
+                //Add image to the list
+                viewRenderer.appendToDOM('#itemList', itemListTemplate, {
+                    itemName: imageId
+                });
 
-    return CreateLogoController;
-});
+                CreateLogoController.makeDraggable('#' + imageId, '#preview');
+
+                id++;
+
+                event.preventDefault();
+            },
+
+            deleteItemClick: function (event) {
+                var deleteButton = $(event.target),
+                    targetId = deleteButton.data('id');
+
+                deleteButton.parent('.list-group-item').remove();
+                $('#' + targetId).remove();
+
+                event.preventDefault();
+            },
+
+            makeDraggable: function (selector, container) {
+                $(selector).draggable({
+                    containment: container
+                });
+            }
+        };
+
+        return CreateLogoController;
+    });
