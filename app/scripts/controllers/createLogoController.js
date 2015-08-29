@@ -72,10 +72,10 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 $('#changeFontNumeric').kendoNumericTextBox({
                     format: '#px',
                     min: 10,
-                    max: 40,
+                    max: 150,
                     step: 1,
                     value: 16,
-                    spin: CreateLogoController.changeFontSize
+                    change: CreateLogoController.changeFontSize
                 });
             },
 

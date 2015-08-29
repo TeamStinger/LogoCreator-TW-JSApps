@@ -37,16 +37,23 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
             myLogosClick: function (event) {
                 var loggedInUser = storage.getItem('loggedInUser');
 
-                logo.getAllByUser(loggedInUser.principal_id)
-                    .then(function (allLogos) {
-                        viewRenderer.render('#view', galleryTemplate, {
-                            isLoggedInUser: loggedInUser,
-                            isInGallery: false,
-                            logos: allLogos.result
+                if (loggedInUser) {
+                    logo.getAllByUser(loggedInUser.principal_id)
+                        .then(function (allLogos) {
+                            viewRenderer.render('#view', galleryTemplate, {
+                                isLoggedInUser: loggedInUser,
+                                isInGallery: false,
+                                logos: allLogos.result
+                            });
+                            galleryController.attachHandlers();
+                            galleryController.attachDeleteButtonHandler();
                         });
-                        galleryController.attachHandlers();
-                        galleryController.attachDeleteButtonHandler();
+                } else {
+                    viewRenderer.render('#view', galleryTemplate, {
+                        isLoggedInUser: loggedInUser,
+                        isInGallery: false
                     });
+                }
 
                 event.preventDefault();
             },
