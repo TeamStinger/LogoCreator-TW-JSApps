@@ -1,7 +1,7 @@
-define(['kendo'], function (kendo) {
+define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function (viewRenderer, logoTextTemplate) {
     var preview,
-        textPreview,
         id,
+        textPreview,
         imagePreview,
         itemList;
 
@@ -9,9 +9,9 @@ define(['kendo'], function (kendo) {
         init: function () {
             preview = $('#preview');
             textPreview = $('#textPreviewer');
-            imagePreview=$('#imagePreviewer');
-            itemList=$('#item-list');
-            id=0;
+            imagePreview = $('#imagePreviewer');
+            itemList = $('#itemList');
+            id = 0;
 
             CreateLogoController.createTabStrip();
             CreateLogoController.createColorPicker();
@@ -25,7 +25,7 @@ define(['kendo'], function (kendo) {
 
         createTabStrip: function () {
             $('#tabstrip').kendoTabStrip({
-                animation:  {
+                animation: {
                     open: {
                         effects: 'fadeIn'
                     }
@@ -34,7 +34,7 @@ define(['kendo'], function (kendo) {
         },
 
         createColorPicker: function () {
-            $('#background').kendoFlatColorPicker({
+            $('#backgroundPicker').kendoFlatColorPicker({
                 preview: false,
                 value: 'rgb(217, 89, 89)',
                 change: CreateLogoController.changeBackgroundColor
@@ -42,7 +42,7 @@ define(['kendo'], function (kendo) {
         },
 
         createSizeSliders: function () {
-            $('#width').kendoSlider({
+            $('#widthSlider').kendoSlider({
                 min: 100,
                 max: 500,
                 value: 250,
@@ -51,7 +51,7 @@ define(['kendo'], function (kendo) {
                 slide: CreateLogoController.changeWidth
             });
 
-            $('#height').kendoSlider({
+            $('#heightSlider').kendoSlider({
                 min: 100,
                 max: 500,
                 value: 250,
@@ -60,6 +60,7 @@ define(['kendo'], function (kendo) {
                 slide: CreateLogoController.changeHeight
             });
         },
+
 
         createFontSizeNumeric: function (selector) {
             $(selector).kendoNumericTextBox({
@@ -119,8 +120,18 @@ define(['kendo'], function (kendo) {
             textPreview.css('font-size', this.value());
         },
 
+        changeFontColor: function (event) {
+            textPreview.css('color', event.value);
+        },
+
         addTextClick: function (event) {
-            var text = $('#text');
+            var textInput = $('#textInput'),
+                textId = 'text-' + id;
+
+            viewRenderer.appendToDOM('#textPreviewer', logoTextTemplate, {
+                id: textId,
+                text: textInput.val()
+            });
 
 
             var textItem=$('<p>')
@@ -144,13 +155,15 @@ define(['kendo'], function (kendo) {
                 .attr('data-id', (id-1))
                 .appendTo(itemList);
 
+            CreateLogoController.makeDraggable('#' + textId, '#preview');
+
+
+
             event.preventDefault();
         },
 
         addImageClick: function (event) {
-
-
-            var image=$('<p>')
+            var image = $('<p>')
                 .addClass('item')
                 .css({
                     display: 'inline-block'
@@ -167,12 +180,11 @@ define(['kendo'], function (kendo) {
                 .css({
                     display: 'block'
                 })
-                .html("Image: picture"+(id-1))
-                .attr('id', 'item-'+(id-1))
+                .html("Image: picture" + (id - 1))
+                .attr('id', 'item-' + (id - 1))
                 .appendTo(itemList);
 
             event.preventDefault();
-
         },
 
         openEditMenu: function (event) {
@@ -223,6 +235,14 @@ define(['kendo'], function (kendo) {
 
         changeFontColor: function (event) {
             textPreview.css('color', event.value);
+        }
+
+
+        makeDraggable: function (selector, area) {
+            $(selector).draggable({
+                containment: area
+            })
+
         }
     };
 
