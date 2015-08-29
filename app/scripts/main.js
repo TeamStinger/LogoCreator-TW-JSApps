@@ -9,7 +9,8 @@ require.config({
         'CryptoJS.SHA1': 'lib/crypto-sha1-min',
         'lightBox': 'lib/lightbox.min',
         'noty': 'lib/jquery.noty.packaged.min',
-        'kendo': 'lib/kendo.ui.core.min'
+        'kendo': 'lib/kendo.ui.core.min',
+        'html2canvas': 'lib/html2canvas'
     },
     shim: {
         'CryptoJS': {

@@ -1,5 +1,9 @@
-define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html', 'text!views/imageGallery.html', 'text!views/itemList.html', '../models/logos', 'kendo'],
-    function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate, imageGalleryTemplate, itemListTemplate, logos) {
+define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html',
+        'text!views/imageGallery.html', 'text!views/itemList.html', '../models/thumbnails', '../models/logo',
+        '../utils/notifier','../utils/storage', 'html2canvas', 'kendo'],
+    function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate,
+              imageGalleryTemplate, itemListTemplate, thumbnails, logo,
+              notifier, storage) {
         var preview,
             id,
             textPreview,
@@ -83,7 +87,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             },
 
             createImageGallery: function () {
-                viewRenderer.render("#imageGallery", imageGalleryTemplate, logos);
+                viewRenderer.render("#imageGallery", imageGalleryTemplate, thumbnails);
             },
 
             createImageResizeSlider: function () {
@@ -197,6 +201,30 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             },
 
             saveLogoClick: function (event) {
+                html2canvas($("#preview"), {
+                    onrendered: function (canvas) {
+                        var imageDataURL = canvas.toDataURL(),
+                            startIndex = imageDataURL.indexOf('base64'),
+                            fileObject;
+
+                        imageDataURL = imageDataURL.slice(startIndex + 7);
+
+                        fileObject = {
+                            Filename: 'logo-' + Date.now() + '.png',
+                            ContentType: 'image/png',
+                            Description: $('#logoDescription').val(),
+                            OwnerName: storage.getItem('currentUserName'),
+                            base64: imageDataURL
+                        };
+
+                        logo.save(fileObject)
+                            .then(function () {
+                                notifier.showSuccessMessage('You have successfully saved your logo!');
+                            }, function () {
+                                notifier.showErrorMessage('Your logo is not saved. Please try again!');
+                            });
+                    }
+                });
 
                 event.preventDefault();
             },
