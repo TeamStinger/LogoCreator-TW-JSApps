@@ -192,18 +192,21 @@ define(['kendo'], function (kendo) {
                     '<h3>Change font-size</h3><p><input id="changeFont-popOut" /></p><h3>Change font-color</h3>' +
                     '<p><input id="changeFontColor-popOut" /></p>' +
                     '<button class="btn btn-primary" id="edit-text">EditText</button>');
-
                 popOutMenu.dialog();
 
                 var button=$('#edit-text')
                     .on('click',function(){
                         var item=$('#'+previewItemId);
-
-                        item.html($('#text-popOut').val());
+                        var text=$('#text-popOut').val();
+                        var color=$('#changeFontColor-popOut').val();
+                        var fontSize= $('#changeFont-popOut').val();
+                        item.html(text);
                         item.css({
-                            color: $('#changeFontColor-popOut').val(),
-                            fontSize: $('#changeFont-popOut').val()
-                        })
+                            color: color,
+                            fontSize: fontSize
+                        });
+                        var itemListText="Text: '"+text+"'";
+                        that.html(itemListText);
 
                         popOutMenu.dialog('close');
                     });
