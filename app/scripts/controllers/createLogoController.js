@@ -101,6 +101,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 $('#addText').on('click', CreateLogoController.addTextClick);
                 $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
                 $('#itemList').on('click', '.badge', CreateLogoController.deleteItemClick);
+                $('#saveLogo').on('click', CreateLogoController.saveLogoClick);
             },
 
             changeBackgroundColor: function (event) {
@@ -191,6 +192,11 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
 
                 deleteButton.parent('.list-group-item').remove();
                 $('#' + targetId).remove();
+
+                event.preventDefault();
+            },
+
+            saveLogoClick: function (event) {
 
                 event.preventDefault();
             },

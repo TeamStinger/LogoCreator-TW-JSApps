@@ -6,6 +6,7 @@
 
             <div id="imagePreviewer" class="imagePreview"></div>
         </div>
+
     </div>
     <div class="col-md-6">
         <div id="tabstrip">
@@ -73,9 +74,18 @@
                 <h3>Image size</h3>
                 <br/>
                 <input id="imageResizeSlider" value="0"/>
-                <br /><br />
+                <br/><br/>
             </div>
         </div>
+
+        <div class="panel panel-default descriptionPanel">
+            <div class="panel-heading">Logo description</div>
+            <div class="panel-body">
+                <textarea placeholder="Write description of your logo here" class="logoDescription"
+                          id="logoDescription"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="button" id="saveLogo">Save Logo</button>
     </div>
 </div>
 {{else}}

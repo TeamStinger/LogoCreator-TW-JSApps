@@ -158,6 +158,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/myLogos.h
                 user.getCurrentUser()
                     .then(function (currentUser) {
                         var name = currentUser.result.DisplayName;
+                        storage.setItem('currentUserName', name);
 
                         $('#loginForm').hide();
                         $('#logout-btn').show();
