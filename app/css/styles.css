@@ -134,11 +134,23 @@ h1 {
     max-height: 100px;
 }
 
-/*.fb-like {*/
-    /*transform: scale(1.7);*/
-    /*-webkit-transform: scale(1.7);*/
-    /*-moz-transform: scale(1.7);*/
-    /*-ms-transform: scale(1.7);*/
-    /*margin-right: 20px;*/
-/*}*/
+.fb-like {
+    position:relative;
+    opacity: 0;
+    Z-index: 2;
+    left: 17px;
+
+}
+
+.fake-btn{
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 43px;
+    left: 48px;
+    background-position: center;
+    background-image: url("../images/fb-logo.png");
+    background-repeat: no-repeat;
+}
+
 
