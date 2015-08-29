@@ -1,9 +1,9 @@
 define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html',
         'text!views/imageGallery.html', 'text!views/itemList.html', '../models/thumbnails', '../models/logo',
-        '../utils/notifier','../utils/storage', 'html2canvas', 'kendo'],
+        '../models/categories', '../utils/notifier', '../utils/storage', 'html2canvas', 'kendo'],
     function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate,
               imageGalleryTemplate, itemListTemplate, thumbnails, logo,
-              notifier, storage) {
+              categories, notifier, storage) {
         var preview,
             id,
             textPreview,
@@ -26,6 +26,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 CreateLogoController.createLogoTextColorPicker();
                 CreateLogoController.createImageGallery();
                 CreateLogoController.createImageResizeSlider();
+                CreateLogoController.createCategorySelect();
                 CreateLogoController.attachHandlers();
             },
 
@@ -97,6 +98,15 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                     smallStep: 10,
                     largeStep: 50,
                     slide: CreateLogoController.changeImageSize
+                });
+            },
+
+            createCategorySelect: function () {
+                $("#category").kendoDropDownList({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: categories,
+                    index: 0
                 });
             },
 
@@ -212,6 +222,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                         fileObject = {
                             Filename: 'logo-' + Date.now() + '.png',
                             ContentType: 'image/png',
+                            Category: $("#category").val(),
                             Description: $('#logoDescription').val(),
                             OwnerName: storage.getItem('currentUserName'),
                             base64: imageDataURL
