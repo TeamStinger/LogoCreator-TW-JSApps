@@ -21,7 +21,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             CreateLogoController.createLogoTextColorPicker();
             CreateLogoController.createImageGallery();
             CreateLogoController.attachAddTextHandler();
-            CreateLogoController.attachAddImgHandler();
+            CreateLogoController.attachAddImageHandler();
             CreateLogoController.attachDeleteHandler();
         },
 
@@ -90,7 +90,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             $('#addText').on('click', CreateLogoController.addTextClick);
         },
 
-        attachAddImgHandler: function () {
+        attachAddImageHandler: function () {
             $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
         },
 
@@ -141,7 +141,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
         },
 
         addImageClick: function (event) {
-            var imageSrc = event.target.src,
+            var imageSrc = event.currentTarget.href,
                 imageId = 'image-' + id;
 
             //Add image to the preview
@@ -172,10 +172,10 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             event.preventDefault();
         },
 
-        makeDraggable: function (selector, area) {
+        makeDraggable: function (selector, container) {
             $(selector).draggable({
-                containment: area
-            })
+                containment: container
+            });
         }
     };
 
