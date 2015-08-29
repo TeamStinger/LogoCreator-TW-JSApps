@@ -5,7 +5,7 @@ define(function () {
         },
         
         getAll: function () {
-            
+            return Everlive.$.Files.get();
         },
         
         getAllByUser: function () {

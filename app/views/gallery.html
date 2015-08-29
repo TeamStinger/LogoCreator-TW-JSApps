@@ -62,22 +62,20 @@
         {{#each this}}
         <div class="col-md-4 logos">
             <div class="thumbnail gallery gallery-img-container-gridview">
-                <a href="{{this.src}}" data-lightbox="gallery" data-title="{{this.info}}">
-                    <img src='{{this.src}}' alt="logo" class="gallery-img">
+                <a href="{{this.Uri}}" data-lightbox="gallery" data-title="{{this.Description}}">
+                    <img src='{{this.Uri}}' alt="logo" class="gallery-img">
                 </a>
 
                 <div class="caption text gallery-content-gridview">
-                    <h3>{{this.author}}</h3>
+                    <h3>{{this.OwnerName}}</h3>
 
-                    <p>{{this.info}}</p>
-
-                    <p>
+                    <p>{{this.Description}}</p>
 
                     <div id="fb-root"></div>
-                    <div class="fb-like btn btn-primary" data-href="{{this.src}}" data-layout="button"
+                    <div class="fb-like btn btn-primary" data-href="{{this.Uri}}" data-layout="button"
                          data-action="like" data-show-faces="false" data-share="false"></div>
                     <!--<a href="#" class="btn btn-primary" role="button">Like</a>-->
-                    <a href="{{this.src}}" class="btn btn-primary" role="button">Download</a>
+                    <a href="{{this.Uri}}" class="btn btn-primary" role="button">Download</a>
                     </p>
                 </div>
             </div>
