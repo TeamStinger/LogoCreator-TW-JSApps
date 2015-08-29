@@ -9,9 +9,9 @@ define(['kendo'], function (kendo) {
         init: function () {
             preview = $('#preview');
             textPreview = $('#textPreviewer');
-            imagePreview=$('#imagePreviewer');
-            itemList=$('#item-list');
-            id=0;
+            imagePreview = $('#imagePreviewer');
+            itemList = $('#itemList');
+            id = 0;
 
             CreateLogoController.createTabStrip();
             CreateLogoController.createColorPicker();
@@ -33,7 +33,7 @@ define(['kendo'], function (kendo) {
         },
 
         createColorPicker: function () {
-            $('#background').kendoFlatColorPicker({
+            $('#backgroundPicker').kendoFlatColorPicker({
                 preview: false,
                 value: 'rgb(217, 89, 89)',
                 change: CreateLogoController.changeBackgroundColor
@@ -41,7 +41,7 @@ define(['kendo'], function (kendo) {
         },
 
         createSizeSliders: function () {
-            $('#width').kendoSlider({
+            $('#widthSlider').kendoSlider({
                 min: 100,
                 max: 500,
                 value: 250,
@@ -50,7 +50,7 @@ define(['kendo'], function (kendo) {
                 slide: CreateLogoController.changeWidth
             });
 
-            $('#height').kendoSlider({
+            $('#heightSlider').kendoSlider({
                 min: 100,
                 max: 500,
                 value: 250,
@@ -61,7 +61,7 @@ define(['kendo'], function (kendo) {
         },
 
         createFontSizeNumeric: function () {
-            $('#changeFont').kendoNumericTextBox({
+            $('#changeFontNumeric').kendoNumericTextBox({
                 format: '#px',
                 min: 10,
                 max: 40,
@@ -104,7 +104,7 @@ define(['kendo'], function (kendo) {
         },
 
         addTextClick: function (event) {
-            var text = $('#text');
+            var text = $('#textInput');
 
 
             var textItem=$('<p>')
