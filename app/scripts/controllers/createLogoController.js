@@ -17,9 +17,10 @@ define(['kendo'], function (kendo) {
             CreateLogoController.createColorPicker();
             CreateLogoController.createSizeSliders();
             CreateLogoController.createFontSizeNumeric();
-            CreateLogoController.createLogoTextColorPicker();
+            CreateLogoController.createLogoTextColorPicker('#changeFontColor');
             CreateLogoController.attachAddTextHandler();
-            CreateLogoController.attachAddImgHandler()
+            CreateLogoController.attachAddImgHandler();
+            CreateLogoController.attachListItemHandler();
         },
 
         createTabStrip: function () {
@@ -71,13 +72,29 @@ define(['kendo'], function (kendo) {
             });
         },
 
-        createLogoTextColorPicker: function () {
-            $('#changeFontColor').kendoColorPicker({
+        createLogoTextColorPicker: function (selector) {
+            $(selector).kendoColorPicker({
                 value: '#ffffff',
                 buttons: false,
                 select: CreateLogoController.changeFontColor
             });
         },
+
+        /*createLogoTextColorPicker: function () {
+            $('#changeFontColor').kendoColorPicker({
+                value: '#ffffff',
+                buttons: false,
+                select: CreateLogoController.changeFontColor
+            });
+        },*/
+
+        /*createLogoTextColorPickerPopOut: function () {
+            $('#changeFontColorPopOut').kendoColorPicker({
+                value: '#ffffff',
+                buttons: false,
+                select: CreateLogoController.changeFontColor
+            });
+        },*/
 
         attachAddTextHandler: function () {
             $('#addText').on('click', CreateLogoController.addTextClick);
@@ -85,6 +102,10 @@ define(['kendo'], function (kendo) {
 
         attachAddImgHandler: function () {
             $('#addImage').on('click', CreateLogoController.addImageClick);
+        },
+
+        attachListItemHandler: function(){
+            itemList.on('click', CreateLogoController.openEditMenu);
         },
 
         changeBackgroundColor: function (event) {
@@ -125,7 +146,7 @@ define(['kendo'], function (kendo) {
                     display: 'block'
                 })
                 .html("Text: '"+text.val()+"'")
-                .attr('id', 'item-'+(id-1))
+                .attr('data-id', (id-1))
                 .appendTo(itemList);
 
             event.preventDefault();
@@ -145,7 +166,7 @@ define(['kendo'], function (kendo) {
                 .html('picture')
                 .attr('id', id++)
                 .appendTo(imagePreview);
-            //textPreview.text(text.val());
+
             var imageItem=$('<p>')
                 .addClass('item')
                 .css({
@@ -157,6 +178,25 @@ define(['kendo'], function (kendo) {
 
             event.preventDefault();
 
+        },
+
+        openEditMenu: function (event) {
+            var that=$(event.target);
+
+            if(that.hasClass('item')){
+                var previewItemId=that.attr('data-id');
+
+                var popOutMenu=$('<div>')
+                    .html('<h3>Change font-size</h3><p><input id="changeFont" /></p><h3>Change font-color</h3>' +
+                    '<p><input id="changeFontColorPopOut" /></p>' +
+                    '<button class="btn btn-primary" id="addText">EditText</button>');
+                popOutMenu.dialog();
+                CreateLogoController.createLogoTextColorPickerPopOut('#changeFontColorPopOut');
+
+
+                console.log(previewItemId);
+                console.log('Context Menu');
+            }
         },
 
         changeFontColor: function (event) {
