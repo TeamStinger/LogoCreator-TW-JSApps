@@ -87,6 +87,19 @@ h1 {
     box-sizing: border-box;
 }
 
+.imageGallery {
+    margin: 0 auto 20px;
+    width: 93%;
+}
+
+.imageGallery .col-md-1 {
+    padding: 0;
+}
+
+.imageGallery .thumbnail {
+    margin-bottom: 0;
+}
+
 /*.fb-like {*/
     /*transform: scale(1.7);*/
     /*-webkit-transform: scale(1.7);*/

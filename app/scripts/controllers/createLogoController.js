@@ -1,4 +1,5 @@
-define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function (viewRenderer, logoTextTemplate) {
+define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/logoImagePreview.html', 'text!views/logoImage.html', '../models/logos', 'kendo'],
+    function (viewRenderer, logoTextPreviewTemplate, logoImagePreviewTemplate, logoImageTemplate, logos) {
     var preview,
         id,
         textPreview,
@@ -16,11 +17,11 @@ define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function 
             CreateLogoController.createTabStrip();
             CreateLogoController.createColorPicker();
             CreateLogoController.createSizeSliders();
-            CreateLogoController.createFontSizeNumeric('#changeFont');
-            CreateLogoController.createLogoTextColorPicker('#changeFontColor');
+            CreateLogoController.createFontSizeNumeric();
+            CreateLogoController.createLogoTextColorPicker();
+            CreateLogoController.createImageGallery();
             CreateLogoController.attachAddTextHandler();
-            CreateLogoController.attachAddImgHandler();
-            CreateLogoController.attachListItemHandler();
+            CreateLogoController.attachAddImgHandler()
         },
 
         createTabStrip: function () {
@@ -61,9 +62,8 @@ define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function 
             });
         },
 
-
-        createFontSizeNumeric: function (selector) {
-            $(selector).kendoNumericTextBox({
+        createFontSizeNumeric: function () {
+            $('#changeFontNumeric').kendoNumericTextBox({
                 format: '#px',
                 min: 10,
                 max: 40,
@@ -72,36 +72,25 @@ define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function 
                 spin: CreateLogoController.changeFontSize
             });
         },
-       /* createFontSizeNumeric: function () {
-            $('#changeFont').kendoNumericTextBox({
-                format: '#px',
-                min: 10,
-                max: 40,
-                step: 1,
-                value: 16,
-                spin: CreateLogoController.changeFontSize
-            });
-        },*/
 
-        createLogoTextColorPicker: function (selector) {
-            $(selector).kendoColorPicker({
+        createLogoTextColorPicker: function () {
+            $('#changeFontColor').kendoColorPicker({
                 value: '#ffffff',
                 buttons: false,
                 select: CreateLogoController.changeFontColor
             });
         },
 
+        createImageGallery: function () {
+            viewRenderer.render("#imageGallery", logoImageTemplate, logos);
+        },
 
         attachAddTextHandler: function () {
             $('#addText').on('click', CreateLogoController.addTextClick);
         },
 
         attachAddImgHandler: function () {
-            $('#addImage').on('click', CreateLogoController.addImageClick);
-        },
-
-        attachListItemHandler: function(){
-            itemList.on('click', CreateLogoController.openEditMenu);
+            $('#imageGallery').on('click', 'a', CreateLogoController.addImageClick);
         },
 
         changeBackgroundColor: function (event) {
@@ -128,120 +117,38 @@ define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function 
             var textInput = $('#textInput'),
                 textId = 'text-' + id;
 
-            viewRenderer.appendToDOM('#textPreviewer', logoTextTemplate, {
+            viewRenderer.appendToDOM('#textPreviewer', logoTextPreviewTemplate, {
                 id: textId,
                 text: textInput.val()
             });
 
-
-            var textItem=$('<p>')
-                .addClass('item')
-                .css({
-                    display: 'inline-block'
-                })
-                .draggable({
-                    containment: '#preview'
-                })
-                .html(text.val())
-                .attr('id', id++)
-                .appendTo(textPreview);
-            //textPreview.text(text.val());
-            var textItem=$('<p>')
-                .addClass('item')
-                .css({
-                    display: 'block'
-                })
-                .html("Text: '"+text.val()+"'")
-                .attr('data-id', (id-1))
-                .appendTo(itemList);
-
             CreateLogoController.makeDraggable('#' + textId, '#preview');
 
-
+            id++;
 
             event.preventDefault();
         },
 
         addImageClick: function (event) {
-            var image = $('<p>')
-                .addClass('item')
-                .css({
-                    display: 'inline-block'
-                })
-                .draggable({
-                    containment: '#preview'
-                })
-                .html('picture')
-                .attr('id', id++)
-                .appendTo(imagePreview);
+            var imageSrc = event.target.src,
+                imageId = 'image-' + id;
 
-            var imageItem=$('<p>')
-                .addClass('item')
-                .css({
-                    display: 'block'
-                })
-                .html("Image: picture" + (id - 1))
-                .attr('id', 'item-' + (id - 1))
-                .appendTo(itemList);
+            viewRenderer.appendToDOM('#imagePreviewer', logoImagePreviewTemplate, {
+                id: imageId,
+                src: imageSrc
+            });
+
+            CreateLogoController.makeDraggable('#' + imageId, '#preview');
+
+            id++;
 
             event.preventDefault();
-        },
-
-        openEditMenu: function (event) {
-            var that=$(event.target);
-
-            if(that.hasClass('item')){
-                var previewItemId=that.attr('data-id');
-
-                var popOutMenu=$('<div>');
-
-
-                //re use text tab as popuot menu
-                var body=$('#textTab');
-
-                popOutMenu
-                    .html(' <h3>Type Text</h3><p><input type="text" class="form-control border-box" id="text-popOut" /></p>' +
-                    '<h3>Change font-size</h3><p><input id="changeFont-popOut" /></p><h3>Change font-color</h3>' +
-                    '<p><input id="changeFontColor-popOut" /></p>' +
-                    '<button class="btn btn-primary" id="edit-text">EditText</button>');
-                popOutMenu.dialog();
-
-                var button=$('#edit-text')
-                    .on('click',function(){
-                        var item=$('#'+previewItemId);
-                        var text=$('#text-popOut').val();
-                        var color=$('#changeFontColor-popOut').val();
-                        var fontSize= $('#changeFont-popOut').val();
-                        item.html(text);
-                        item.css({
-                            color: color,
-                            fontSize: fontSize
-                        });
-                        var itemListText="Text: '"+text+"'";
-                        that.html(itemListText);
-
-                        popOutMenu.dialog('close');
-                    });
-
-
-                CreateLogoController.createLogoTextColorPicker('#changeFontColor-popOut');
-                CreateLogoController.createFontSizeNumeric('#changeFont-popOut');
-
-
-                console.log(previewItemId);
-                console.log('Context Menu');
-            }
-        },
-
-        changeFontColor: function (event) {
-            textPreview.css('color', event.value);
         },
 
         makeDraggable: function (selector, area) {
             $(selector).draggable({
                 containment: area
             })
-
         }
     };
 
