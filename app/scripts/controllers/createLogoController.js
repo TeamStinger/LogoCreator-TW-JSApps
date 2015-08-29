@@ -1,7 +1,7 @@
-define(['kendo'], function (kendo) {
+define(['../utils/viewRenderer', 'text!views/logoText.html', 'kendo'], function (viewRenderer, logoTextTemplate) {
     var preview,
-        textPreview,
         id,
+        textPreview,
         imagePreview,
         itemList;
 
@@ -24,7 +24,7 @@ define(['kendo'], function (kendo) {
 
         createTabStrip: function () {
             $('#tabstrip').kendoTabStrip({
-                animation:  {
+                animation: {
                     open: {
                         effects: 'fadeIn'
                     }
@@ -103,38 +103,28 @@ define(['kendo'], function (kendo) {
             textPreview.css('font-size', this.value());
         },
 
+        changeFontColor: function (event) {
+            textPreview.css('color', event.value);
+        },
+
         addTextClick: function (event) {
-            var text = $('#textInput');
+            var textInput = $('#textInput'),
+                textId = 'text-' + id;
 
+            viewRenderer.appendToDOM('#textPreviewer', logoTextTemplate, {
+                id: textId,
+                text: textInput.val()
+            });
 
-            var textItem=$('<p>')
-                .addClass('item')
-                .css({
-                    display: 'inline-block'
-                })
-                .draggable({
-                    containment: '#preview'
-                })
-                .html(text.val())
-                .attr('id', id++)
-                .appendTo(textPreview);
-            //textPreview.text(text.val());
-            var textItem=$('<p>')
-                .addClass('item')
-                .css({
-                    display: 'block'
-                })
-                .html("Text: '"+text.val()+"'")
-                .attr('id', 'item-'+(id-1))
-                .appendTo(itemList);
+            CreateLogoController.makeDraggable('#' + textId, '#preview');
+
+            id++;
 
             event.preventDefault();
         },
 
         addImageClick: function (event) {
-
-
-            var image=$('<p>')
+            var image = $('<p>')
                 .addClass('item')
                 .css({
                     display: 'inline-block'
@@ -146,21 +136,22 @@ define(['kendo'], function (kendo) {
                 .attr('id', id++)
                 .appendTo(imagePreview);
             //textPreview.text(text.val());
-            var imageItem=$('<p>')
+            var imageItem = $('<p>')
                 .addClass('item')
                 .css({
                     display: 'block'
                 })
-                .html("Image: picture"+(id-1))
-                .attr('id', 'item-'+(id-1))
+                .html("Image: picture" + (id - 1))
+                .attr('id', 'item-' + (id - 1))
                 .appendTo(itemList);
 
             event.preventDefault();
-
         },
 
-        changeFontColor: function (event) {
-            textPreview.css('color', event.value);
+        makeDraggable: function (selector, area) {
+            $(selector).draggable({
+                containment: area
+            })
         }
     };
 
