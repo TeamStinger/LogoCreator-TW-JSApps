@@ -21,7 +21,11 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
             galleryClick: function (event) {
                 logo.getAll()
                     .then(function (allLogos) {
-                        viewRenderer.render('#view', galleryTemplate, allLogos.result);
+                        viewRenderer.render('#view', galleryTemplate, {
+                            isLoggedInUser: true,
+                            isInGallery: true,
+                            logos: allLogos.result
+                        });
                         galleryController.attachHandlers();
                     }, function (error) {
                         notifier.showErrorMessage('Cannot load gallery. Please try again!');
@@ -33,9 +37,16 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
             myLogosClick: function (event) {
                 var loggedInUser = storage.getItem('loggedInUser');
 
-                viewRenderer.render('#view', myLogosTemplate, {
-                    isLoggedInUser: loggedInUser
-                });
+                logo.getAllByUser(loggedInUser.principal_id)
+                    .then(function (allLogos) {
+                        viewRenderer.render('#view', galleryTemplate, {
+                            isLoggedInUser: loggedInUser,
+                            isInGallery: false,
+                            logos: allLogos.result
+                        });
+                        galleryController.attachHandlers();
+                        galleryController.attachDeleteButtonHandler();
+                    });
 
                 event.preventDefault();
             },

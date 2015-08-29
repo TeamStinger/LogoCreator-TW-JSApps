@@ -1,9 +1,13 @@
-define([], function () {
+define(['../models/logo', '../utils/notifier'], function (logo, notifier) {
     var GalleryController = {
         attachHandlers: function () {
             $('#dropdownMenu1').on('click', GalleryController.sortMenuClick);
             $('#dropdownMenu2').on('click', GalleryController.categoryMenuClick);
             $('#grid-btn').on('click', GalleryController.gridButtonClick);
+        },
+
+        attachDeleteButtonHandler: function () {
+            $('.sub-container').on('click', '.btn-danger', GalleryController.deleteButtonClick);
         },
 
         sortMenuClick: function () {
@@ -49,6 +53,18 @@ define([], function () {
 
                 $logosContent.addClass('gallery-content-gridview');
             }
+        },
+
+        deleteButtonClick: function (event) {
+            var logoId = $(event.target).data('id');
+
+            logo.delete(logoId)
+                .then(function () {
+                    $('#' + logoId).remove();
+                }, function () {
+                    notifier.showErrorMessage('Something went wrong. Please try again!');
+                });
+            event.preventDefault();
         }
     };
 
