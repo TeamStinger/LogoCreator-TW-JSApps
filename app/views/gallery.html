@@ -65,7 +65,7 @@
         <div class="col-md-4 logos" id="{{this.Id}}">
             <div class="thumbnail gallery gallery-img-container-gridview">
                 <a href="{{this.Uri}}" data-lightbox="gallery" data-title="{{this.Description}}">
-                    <img src='{{this.Uri}}' alt="logo" class="gallery-img">
+                    <img src='{{this.Uri}}' alt="logo" class="logo-img gallery-img-gridview">
                 </a>
 
                 <div class="caption text gallery-content-gridview">
@@ -76,7 +76,6 @@
                     <p>
                     <div class="row">
                         {{#if ../isInGallery}}
-                        <div id="fb-root"></div>
                         <div class="col-md-5">
                             <a href="{{this.Uri}}" class="btn btn-primary" role="button">Download</a>
                         </div>

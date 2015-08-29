@@ -23,7 +23,8 @@ define(['../models/logo', '../utils/notifier'], function (logo, notifier) {
                 $btnIcon = $btn.children().first(),
                 $logos = $('.logos'),
                 $logoContainers = $('.thumbnail'),
-                $logosContent = $('.caption');
+                $logosContent = $('.caption'),
+                $logoImg = $('.logo-img');
 
             //Switch from grid view to list
             if ($btnIcon.hasClass('glyphicon-th')) {
@@ -36,8 +37,13 @@ define(['../models/logo', '../utils/notifier'], function (logo, notifier) {
                 $logos.fadeIn(800);
 
                 $logoContainers.removeClass('gallery-img-container-gridview');
+                $logoContainers.addClass('gallery-img-container-listview');
 
                 $logosContent.removeClass('gallery-content-gridview');
+                $logosContent.addClass('gallery-content-listview');
+
+                $logoImg.removeClass('gallery-img-gridview');
+                $logoImg.addClass('gallery-img-listview');
 
                 //Switch from list view to grid
             } else {
@@ -49,9 +55,15 @@ define(['../models/logo', '../utils/notifier'], function (logo, notifier) {
                 $logos.addClass('col-md-4');
                 $logos.fadeIn(800);
 
+                $logosContent.removeClass('gallery-content-listview');
+                $logosContent.addClass('gallery-content-gridview');
+
+                $logoContainers.removeClass('gallery-img-container-listview');
                 $logoContainers.addClass('gallery-img-container-gridview');
 
-                $logosContent.addClass('gallery-content-gridview');
+                $logoImg.removeClass('gallery-img-listview');
+                $logoImg.addClass('gallery-img-gridview');
+
             }
         },
 
