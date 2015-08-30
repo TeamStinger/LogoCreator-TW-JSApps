@@ -15,6 +15,10 @@ define(function () {
             return Everlive.$.Files.get(filter);
         },
 
+        sortByCondition: function (condition) {
+            return Everlive.$.Files.get(condition);
+        },
+
         delete: function (id) {
             return Everlive.$.Files.destroySingle({Id: id});
         }
