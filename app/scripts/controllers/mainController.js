@@ -1,9 +1,9 @@
-define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLogo.html', '../utils/viewRenderer',
-        './homeController', '../models/user', '../models/logo', '../utils/storage', './galleryController',
-        './createLogoController', '../utils/notifier'],
-    function (homeTemplate, galleryTemplate, createLogoTemplate, viewRenderer,
-              homeController, user, logo, storage, galleryController,
-              createLogoController, notifier) {
+define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLogo.html', 'text!views/about.html',
+        '../utils/viewRenderer', './homeController', '../models/user', '../models/logo', '../utils/storage',
+        './galleryController', './createLogoController', '../utils/notifier'],
+    function (homeTemplate, galleryTemplate, createLogoTemplate, aboutTemplate,
+              viewRenderer, homeController, user, logo, storage,
+              galleryController, createLogoController, notifier) {
         var MainController = {
             init: function () {
                 new Everlive('pgQ17WjqBcAocZNw'); //This instance is accessed through Everlive.$
@@ -70,6 +70,10 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 event.preventDefault();
             },
 
+            aboutClick: function () {
+                viewRenderer.render('#view', aboutTemplate, {});
+            },
+
             loginClick: function (event) {
                 var formData = $(this).serializeArray(),
                     userData = {};
@@ -107,6 +111,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 $('#gallery').on('click', this.galleryClick);
                 $('#myLogos').on('click', this.myLogosClick);
                 $('#createLogo').on('click', this.createLogoClick);
+                $('#about').on('click', this.aboutClick);
                 $('#loginForm').on('submit', this.loginClick);
                 $('#logout-btn').on('click', this.logoutClick);
             },
