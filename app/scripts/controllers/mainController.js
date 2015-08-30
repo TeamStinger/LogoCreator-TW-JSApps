@@ -1,9 +1,9 @@
 define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLogo.html', 'text!views/about.html',
         '../utils/viewRenderer', './homeController', '../models/user', '../models/logo', '../utils/storage',
-        './galleryController', './createLogoController', '../utils/notifier'],
+        './galleryController', './createLogoController', '../utils/notifier', '../models/categories'],
     function (homeTemplate, galleryTemplate, createLogoTemplate, aboutTemplate,
               viewRenderer, homeController, user, logo, storage,
-              galleryController, createLogoController, notifier) {
+              galleryController, createLogoController, notifier, categories) {
         var MainController = {
             init: function () {
                 new Everlive('pgQ17WjqBcAocZNw'); //This instance is accessed through Everlive.$
@@ -24,7 +24,8 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                         viewRenderer.render('#view', galleryTemplate, {
                             isLoggedInUser: true,
                             isInGallery: true,
-                            logos: allLogos.result
+                            logos: allLogos.result,
+                            categories: categories
                         });
                         galleryController.attachHandlers();
                     }, function (error) {

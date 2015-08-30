@@ -1,10 +1,11 @@
-define(['../models/logo', '../utils/notifier', '../utils/viewRenderer', 'text!views/gallery.html'],
-    function (logo, notifier, viewRenderer, galleryTemplate) {
+define(['../models/logo', '../models/categories', '../utils/notifier', '../utils/viewRenderer', 'text!views/gallery.html'],
+    function (logo, categories, notifier, viewRenderer, galleryTemplate) {
         var GalleryController = {
             attachHandlers: function () {
                 $('#dropdownMenu1').on('click', GalleryController.sortMenuClick);
                 $('#dropdownMenu2').on('click', GalleryController.categoryMenuClick);
                 $('#dropdown-menu-sort').on('click', 'a', GalleryController.sortOptionClick);
+                $('#dropdown-menu-category').on('click', 'a', GalleryController.categoryOptionClick);
                 $('#grid-btn').on('click', GalleryController.gridButtonClick);
             },
 
@@ -30,12 +31,13 @@ define(['../models/logo', '../utils/notifier', '../utils/viewRenderer', 'text!vi
                     query.orderDesc('CreatedAt')
                 }
 
-                logo.sortByCondition(query)
+                logo.getByCondition(query)
                     .then(function (sortedLogos) {
                         viewRenderer.render('#view', galleryTemplate, {
                             isLoggedInUser: true,
                             isInGallery: true,
-                            logos: sortedLogos.result
+                            logos: sortedLogos.result,
+                            categories: categories
                         });
 
                         GalleryController.attachHandlers();
@@ -44,6 +46,30 @@ define(['../models/logo', '../utils/notifier', '../utils/viewRenderer', 'text!vi
                     });
 
                 GalleryController.sortMenuClick();
+                event.preventDefault();
+            },
+
+            categoryOptionClick: function (event) {
+                var query = new Everlive.Query(),
+                    filter = $(event.target).data('category');
+
+                query.where().eq('Category', filter);
+
+                logo.getByCondition(query)
+                    .then(function (filteredLogos) {
+                        viewRenderer.render('#view', galleryTemplate, {
+                            isLoggedInUser: true,
+                            isInGallery: true,
+                            logos: filteredLogos.result,
+                            categories: categories
+                        });
+
+                        GalleryController.attachHandlers();
+                    }, function () {
+                        notifier.showErrorMessage('Cannot load gallery. Please try again!');
+                    });
+
+                GalleryController.categoryMenuClick();
                 event.preventDefault();
             },
 

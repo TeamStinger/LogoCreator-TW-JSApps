@@ -15,7 +15,7 @@ define(function () {
             return Everlive.$.Files.get(filter);
         },
 
-        sortByCondition: function (condition) {
+        getByCondition: function (condition) {
             return Everlive.$.Files.get(condition);
         },
 
