@@ -107,6 +107,10 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 event.preventDefault();
             },
 
+            learnClick: function (event) {
+                homeController.learnButtonClick(event);
+            },
+
             attachNavigationHandlers: function () {
                 $('#home').on('click', this.homeClick);
                 $('#gallery').on('click', this.galleryClick);
@@ -115,6 +119,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 $('#about').on('click', this.aboutClick);
                 $('#loginForm').on('submit', this.loginClick);
                 $('#logout-btn').on('click', this.logoutClick);
+                $('#learnButton').on('click', this.learnClick);
             },
 
             renderPageByUserAuthentication: function () {

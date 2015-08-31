@@ -1,8 +1,12 @@
-define(['../models/user', '../utils/notifier'], function (user, notifier) {
+define(['../models/user', '../utils/notifier', '../utils/viewRenderer', 'text!views/about.html'],
+    function (user, notifier, viewRenderer, aboutTemplate) {
     var HomeController = {
         attachHandlers: function () {
-            var registerForm = $('#registerForm');
+            var registerForm = $('#registerForm'),
+                learnButton = $('#learnButton');
+
             registerForm.on('submit', this.submitRegister);
+            learnButton.on('click', this.learnButtonClick);
         },
 
         submitRegister: function (event) {
@@ -20,6 +24,12 @@ define(['../models/user', '../utils/notifier'], function (user, notifier) {
                 }, function (error) {
                     notifier.showErrorMessage(error.message);
                 });
+
+            event.preventDefault();
+        },
+
+        learnButtonClick: function (event) {
+            viewRenderer.render('#view', aboutTemplate, {});
 
             event.preventDefault();
         }

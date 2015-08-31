@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-{{#if isLoggedInUser}}12{{else}}6{{/if}}">
         <div class="jumbotron">
             <h1>Welcome to LogoJet!</h1>
 
@@ -11,123 +11,122 @@
 
             <p>Have fun and rediscover the artist within you!</p>
 
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button" id="learnButton">Learn more</a></p>
         </div>
     </div>
 
     {{#if isLoggedInUser}}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="thumbnail">
-                <h3>Wondering how it works?</h3>
+    <div class="col-md-12">
+        <div class="thumbnail">
+            <h3>Wondering how it works?</h3>
 
-                <p>Follow these easy 7 steps:</p>
-            </div>
+            <p>Follow these easy 7 steps:</p>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>Firstly navigate to Create logo</h3>
             <img src="./images/HowToPictures/first.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>Now set the desired width and height of your logo</h3>
             <img src="./images/HowToPictures/second.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>You can set the background to any color you can imagine</h3>
             <img src="./images/HowToPictures/third.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>You are given a wide variety of images that you can add.</h3>
 
             <p>Simply click on the image and it will appear on the canvas.</p>
 
             <p>Click and drag on it to position and set the desired size using the slider.</p>
             <img src="./images/HowToPictures/forth.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>Now all you need to finish your logo is adding text.</h3>
 
             <p>Text also works with our state of the art click and drag technology.</p>
             <img src="./images/HowToPictures/fifth.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>Hey don't worry if you make a mistake!</h3>
 
             <p>LogoJet uses advanced layering technology that allows you to remove any unwanted image or text.</p>
             <img src="./images/HowToPictures/sixth.png"/>
-            </div>
         </div>
-        <div class="col-md-12">
-            <div class="thumbnail">
+    </div>
+    <div class="col-md-12">
+        <div class="thumbnail">
             <h3>Last but not least you need to select the category in which your logo will be added</h3>
 
             <p>Also you can add a short comment about it.</p>
 
             <p>And simply click save.</p>
             <img src="./images/HowToPictures/seventh.png"/>
-            </div>
         </div>
-        {{else}}
-        <div class="col-md-6" id="registerPanel">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Register form</h3>
-                </div>
-                <div class="panel-body">
-                    <form class="form-horizontal" id="registerForm" method="post">
-                        <fieldset class="form-group">
-                            <label for="name" class="col-md-3 control-label">Username</label>
-
-                            <p class="col-md-9">
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
-                            </p>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <label for="password" class="col-md-3 control-label">Password</label>
-
-                            <p class="col-md-9">
-                                <input type="password" id="password" name="password" class="form-control"
-                                       placeholder="Password"/>
-                            </p>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <label for="displayName" class="col-md-3 control-label">Display Name</label>
-
-                            <p class="col-md-9">
-                                <input type="text" id="displayName" name="displayName" class="form-control"
-                                       placeholder="Display Name"/>
-                            </p>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <label for="email" class="col-md-3 control-label">Email</label>
-
-                            <p class="col-md-9">
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
-                            </p>
-                        </fieldset>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-10">
-                                <button id="register" type="submit" class="btn btn-default">Register</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {{/if}}
     </div>
+    {{else}}
+    <div class="col-md-6" id="registerPanel">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Register form</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" id="registerForm" method="post">
+                    <fieldset class="form-group">
+                        <label for="name" class="col-md-3 control-label">Username</label>
+
+                        <p class="col-md-9">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Username"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="password" class="col-md-3 control-label">Password</label>
+
+                        <p class="col-md-9">
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Password"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="displayName" class="col-md-3 control-label">Display Name</label>
+
+                        <p class="col-md-9">
+                            <input type="text" id="displayName" name="displayName" class="form-control"
+                                   placeholder="Display Name"/>
+                        </p>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="email" class="col-md-3 control-label">Email</label>
+
+                        <p class="col-md-9">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email"/>
+                        </p>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-10">
+                            <button id="register" type="submit" class="btn btn-default">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
