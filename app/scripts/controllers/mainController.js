@@ -130,6 +130,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 });
 
                 if (loggedInUser) {
+                    $('#learnButton').on('click', homeController.learnButtonClick);
                     user.restoreAuthorization(loggedInUser);
                     MainController.hideLoginForm();
                 } else {
