@@ -27,6 +27,7 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
                 CreateLogoController.createImageGallery();
                 CreateLogoController.createImageResizeSlider();
                 CreateLogoController.createCategorySelect();
+                CreateLogoController.validateDescription();
                 CreateLogoController.attachHandlers();
             },
 
@@ -243,6 +244,21 @@ define(['../utils/viewRenderer', 'text!views/logoTextPreview.html', 'text!views/
             makeDraggable: function (selector, container) {
                 $(selector).draggable({
                     containment: container
+                });
+            },
+
+            validateDescription: function () {
+                var descriptionBox = $('#logoDescription');
+                descriptionBox.on('keyup', function () {
+                    var text = descriptionBox.val();
+                    console.log(text);
+                    if (-1 < text.length && text.length < 150) {
+                        $('#validationMsg').hide();
+                        $('#saveLogo').prop('disabled', false);
+                    } else {
+                        $('#validationMsg').show();
+                        $('#saveLogo').prop('disabled', true);
+                    }
                 });
             }
         };
