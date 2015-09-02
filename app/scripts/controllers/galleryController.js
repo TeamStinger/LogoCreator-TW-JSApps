@@ -1,5 +1,41 @@
 define(['../models/logo', '../models/categories', '../utils/notifier', '../utils/viewRenderer', 'text!views/gallery.html'],
     function (logo, categories, notifier, viewRenderer, galleryTemplate) {
+        var amountToTake = 9,
+            amountToSkip = 0,
+            logos = [],
+            currentFilter;
+
+        function renderCollection(query) {
+            logo.getByCondition(query)
+                .then(function (sortedLogos) {
+                    for (var i = 0; i < sortedLogos.result.length; i += 1) {
+                        logos.push(sortedLogos.result[i]);
+                    }
+                    viewRenderer.render('#view', galleryTemplate, {
+                        isLoggedInUser: true,
+                        isInGallery: true,
+                        logos: logos,
+                        categories: categories
+                    }, function (error) {
+                        notifier.showErrorMessage('Cannot load gallery. Please try again!');
+                    });
+
+                    GalleryController.attachHandlers();
+                });
+        }
+
+        function setSortQuery(query, filter) {
+            if (filter !== 'CreatedAtDescending') {
+                query.orderDesc('CreatedAt').skip(amountToSkip).take(amountToTake);
+            } else {
+                query.order(filter).skip(amountToSkip).take(amountToTake);
+            }
+        }
+
+        function setCategoryQuery(query, filter) {
+            query.where().eq('Category', filter);
+        }
+
         var GalleryController = {
             attachHandlers: function () {
                 $('#dropdownMenu1').on('click', GalleryController.sortMenuClick);
@@ -7,6 +43,14 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 $('#dropdown-menu-sort').on('click', 'a', GalleryController.sortOptionClick);
                 $('#dropdown-menu-category').on('click', 'a', GalleryController.categoryOptionClick);
                 $('#grid-btn').on('click', GalleryController.gridButtonClick);
+                $('#showMoreBtn').on('click', function () {
+                    amountToSkip += amountToTake;
+                    if (currentFilter === 'CreatedAtDescending' || currentFilter === 'CreatedAt' || currentFilter === 'OwnerName') {
+                        GalleryController.sortOptionClick('');
+                    } else {
+                        GalleryController.categoryOptionClick('');
+                    }
+                })
             },
 
             attachDeleteButtonHandler: function () {
@@ -22,53 +66,48 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
             },
 
             sortOptionClick: function (event) {
-                var query = new Everlive.Query(),
-                    filter = $(event.target).data('sort');
-
-                if (filter !== 'CreatedAtDescending') {
-                    query.order(filter);
+                var query = new Everlive.Query();
+                var filter;
+                if (event === '') {
+                    filter = currentFilter;
                 } else {
-                    query.orderDesc('CreatedAt')
+                    filter = $(event.target).data('sort');
                 }
 
-                logo.getByCondition(query)
-                    .then(function (sortedLogos) {
-                        viewRenderer.render('#view', galleryTemplate, {
-                            isLoggedInUser: true,
-                            isInGallery: true,
-                            logos: sortedLogos.result,
-                            categories: categories
-                        });
+                if (currentFilter !== filter && event !== '') {
+                    logos = [];
+                    amountToSkip = 0;
+                }
 
-                        GalleryController.attachHandlers();
-                    }, function (error) {
-                        notifier.showErrorMessage('Cannot load gallery. Please try again!');
-                    });
+                setSortQuery(query, filter);
 
+                renderCollection(query);
+
+                currentFilter = filter;
                 GalleryController.sortMenuClick();
-                event.preventDefault();
+
             },
 
             categoryOptionClick: function (event) {
                 var query = new Everlive.Query(),
+                    filter;
+
+                if (event === '') {
+                    filter = currentFilter;
+                } else {
                     filter = $(event.target).data('category');
+                }
 
-                query.where().eq('Category', filter);
+                if (currentFilter !== filter && event !== '') {
+                    logos = [];
+                    amountToSkip = 0;
+                }
 
-                logo.getByCondition(query)
-                    .then(function (filteredLogos) {
-                        viewRenderer.render('#view', galleryTemplate, {
-                            isLoggedInUser: true,
-                            isInGallery: true,
-                            logos: filteredLogos.result,
-                            categories: categories
-                        });
+                setCategoryQuery(query, filter);
 
-                        GalleryController.attachHandlers();
-                    }, function () {
-                        notifier.showErrorMessage('Cannot load gallery. Please try again!');
-                    });
+                renderCollection(query);
 
+                currentFilter = filter;
                 GalleryController.categoryMenuClick();
                 event.preventDefault();
             },
