@@ -5,7 +5,9 @@ define(function () {
         },
 
         getAll: function () {
-            return Everlive.$.Files.get();
+            var filter = new Everlive.Query();
+            filter.order(filter).take(9);
+            return Everlive.$.Files.get(filter);
         },
 
         getAllByUser: function (userId) {
