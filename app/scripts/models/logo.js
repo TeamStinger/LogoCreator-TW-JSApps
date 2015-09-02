@@ -4,9 +4,9 @@ define(function () {
             return Everlive.$.Files.create(fileObject);
         },
 
-        getAll: function () {
+        getInitial: function () {
             var filter = new Everlive.Query();
-            filter.order(filter).take(9);
+            filter.order('CreatedAt').take(9);
             return Everlive.$.Files.get(filter);
         },
 

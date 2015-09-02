@@ -19,19 +19,18 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
             },
 
             galleryClick: function (event) {
-                logo.getAll()
-                    .then(function (allLogos) {
+                logo.getInitial()
+                    .then(function (initialLogos) {
                         viewRenderer.render('#view', galleryTemplate, {
                             isLoggedInUser: true,
                             isInGallery: true,
-                            logos: allLogos.result,
+                            logos: initialLogos.result,
                             categories: categories
                         });
                         galleryController.attachHandlers();
                     }, function (error) {
                         notifier.showErrorMessage('Cannot load gallery. Please try again!');
                     });
-
                 event.preventDefault();
             },
 

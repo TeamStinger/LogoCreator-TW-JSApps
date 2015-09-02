@@ -29,6 +29,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
 
 
                     GalleryController.attachHandlers();
+                    $('#showMoreBtn').show();
                 });
         }
 
@@ -47,15 +48,17 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
 
         var GalleryController = {
             attachHandlers: function () {
+                var $showMoreBtn = $('#showMoreBtn');
                 $('#dropdownMenu1').on('click', GalleryController.sortMenuClick);
                 $('#dropdownMenu2').on('click', GalleryController.categoryMenuClick);
                 $('#dropdown-menu-sort').on('click', 'a', GalleryController.sortOptionClick);
                 $('#dropdown-menu-category').on('click', 'a', GalleryController.categoryOptionClick);
                 $('#grid-btn').on('click', GalleryController.gridButtonClick);
-                $('#showMoreBtn').on('click', function () {
+                $showMoreBtn.hide();
+                $showMoreBtn.on('click', function () {
                     var $this = $(this);
                     if (!isEndOfCollection) {
-
+                        $this.text('Show more');
                         $this.prop('disabled', false);
                         $this.removeClass('btn-danger');
                         $this.addClass('btn-success');
@@ -71,6 +74,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                     } else {
                         $this.removeClass('btn-success');
                         $this.addClass('btn-danger');
+                        $this.text('No more Logos to show :*(. Hey go make some!');
                         $this.prop('disabled', true);
                     }
                 })
@@ -97,7 +101,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                     filter = $(event.target).data('sort');
                 }
 
-                if (currentFilter !== filter && event !== '') {
+                if (currentFilter !== filter || event !== '') {
                     logos = [];
                     amountToSkip = 0;
                 }
@@ -120,7 +124,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                     filter = $(event.target).data('category');
                 }
 
-                if (currentFilter !== filter && event !== '') {
+                if (currentFilter !== filter || event !== '') {
                     logos = [];
                     amountToSkip = 0;
                 }
