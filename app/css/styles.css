@@ -192,3 +192,7 @@ h1 {
     font-size:12px;
     display: none;
 }
+
+.thumbnail>img.about-photo{
+    display: inline;
+}
