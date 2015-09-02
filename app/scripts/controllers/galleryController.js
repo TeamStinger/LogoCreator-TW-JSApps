@@ -55,14 +55,22 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 $('#showMoreBtn').on('click', function () {
                     var $this = $(this);
                     if (!isEndOfCollection) {
+
                         $this.prop('disabled', false);
+                        $this.removeClass('btn-danger');
+                        $this.addClass('btn-success');
+
                         amountToSkip += amountToTake;
+
                         if (currentFilter === 'CreatedAtDescending' || currentFilter === 'CreatedAt' || currentFilter === 'OwnerName') {
                             GalleryController.sortOptionClick('');
                         } else {
                             GalleryController.categoryOptionClick('');
                         }
+
                     } else {
+                        $this.removeClass('btn-success');
+                        $this.addClass('btn-danger');
                         $this.prop('disabled', true);
                     }
                 })

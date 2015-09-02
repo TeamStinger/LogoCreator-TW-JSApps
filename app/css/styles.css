@@ -187,6 +187,10 @@ h1 {
     background-image: url("../images/fb-logo.png");
     background-repeat: no-repeat;
 }
+
+#showMoreBtn{
+    width: 100%;
+}
 #validationMsg{
     color:red;
     font-size:12px;
