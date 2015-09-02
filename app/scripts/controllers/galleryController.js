@@ -34,6 +34,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
 
         function setCategoryQuery(query, filter) {
             query.where().eq('Category', filter);
+            query.skip(amountToSkip).take(amountToTake);
         }
 
         var GalleryController = {
