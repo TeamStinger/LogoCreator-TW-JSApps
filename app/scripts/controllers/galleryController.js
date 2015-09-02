@@ -3,14 +3,21 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
         var amountToTake = 9,
             amountToSkip = 0,
             logos = [],
-            currentFilter;
+            currentFilter,
+            isEndOfCollection = false,
+            count = 0;
 
         function renderCollection(query) {
             logo.getByCondition(query)
                 .then(function (sortedLogos) {
                     for (var i = 0; i < sortedLogos.result.length; i += 1) {
                         logos.push(sortedLogos.result[i]);
+                        count++;
                     }
+
+                    isEndOfCollection = count < 9;
+                    count = 0;
+
                     viewRenderer.render('#view', galleryTemplate, {
                         isLoggedInUser: true,
                         isInGallery: true,
@@ -19,6 +26,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                     }, function (error) {
                         notifier.showErrorMessage('Cannot load gallery. Please try again!');
                     });
+
 
                     GalleryController.attachHandlers();
                 });
@@ -45,11 +53,17 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 $('#dropdown-menu-category').on('click', 'a', GalleryController.categoryOptionClick);
                 $('#grid-btn').on('click', GalleryController.gridButtonClick);
                 $('#showMoreBtn').on('click', function () {
-                    amountToSkip += amountToTake;
-                    if (currentFilter === 'CreatedAtDescending' || currentFilter === 'CreatedAt' || currentFilter === 'OwnerName') {
-                        GalleryController.sortOptionClick('');
+                    var $this = $(this);
+                    if (!isEndOfCollection) {
+                        $this.prop('disabled', false);
+                        amountToSkip += amountToTake;
+                        if (currentFilter === 'CreatedAtDescending' || currentFilter === 'CreatedAt' || currentFilter === 'OwnerName') {
+                            GalleryController.sortOptionClick('');
+                        } else {
+                            GalleryController.categoryOptionClick('');
+                        }
                     } else {
-                        GalleryController.categoryOptionClick('');
+                        $this.prop('disabled', true);
                     }
                 })
             },
@@ -110,7 +124,6 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
 
                 currentFilter = filter;
                 GalleryController.categoryMenuClick();
-                event.preventDefault();
             },
 
             gridButtonClick: function () {
