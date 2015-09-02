@@ -99,7 +99,6 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 renderCollection(query);
 
                 currentFilter = filter;
-                GalleryController.sortMenuClick();
 
             },
 
@@ -123,7 +122,6 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 renderCollection(query);
 
                 currentFilter = filter;
-                GalleryController.categoryMenuClick();
             },
 
             gridButtonClick: function () {
