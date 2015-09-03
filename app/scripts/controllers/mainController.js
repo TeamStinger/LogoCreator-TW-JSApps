@@ -134,6 +134,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                     $('#learnButton').on('click', homeController.learnButtonClick);
                     user.restoreAuthorization(loggedInUser);
                     MainController.hideLoginForm();
+                    $('.fb-login-button').hide();
                 } else {
                     MainController.showLoginForm();
                     homeController.attachHandlers();
