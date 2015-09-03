@@ -85,7 +85,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 user.login(userData)
                     .then(function (data) {
                         storage.setItem('loggedInUser', data.result);
-
+                        $('.fb-login-button').hide();
                         MainController.renderPageByUserAuthentication();
                     }, function (error) {
                         notifier.showErrorMessage(error.message);
@@ -98,7 +98,9 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 user.logout()
                     .then(function (data) {
                         storage.removeItem('loggedInUser');
+                        storage.removeItem('currentUserName');
                         MainController.renderPageByUserAuthentication();
+                        $('.fb-login-button').show();
                     }, function (error) {
                         notifier.showErrorMessage(error.message);
                     });
