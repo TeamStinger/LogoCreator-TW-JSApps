@@ -2,23 +2,27 @@ define(['chai', 'sinon', 'controllers/mainController', 'controllers/homeControll
     var expect = chai.expect;
 
     describe('homeController', function () {
-        describe('when homeClick is initialize', function () {
-            beforeEach(function () {
-                $('<div id="view">').appendTo(document.body);
-                mainController.renderPageByUserAuthentication();
-            });
+        describe('when user is not logged in', function () {
+            describe('when homeClick is initialize', function () {
+                beforeEach(function () {
+                    localStorage.removeItem('loggedInUser');
 
-            afterEach(function () {
-                $('#view').remove();
-            });
+                    $('<div id="view">').appendTo(document.body);
+                    mainController.renderPageByUserAuthentication();
+                });
 
-            it('register form should be in the page', function () {
-                expect($('#registerPanel').length).to.be.equal(1);
-            });
+                afterEach(function () {
+                    $('#view').remove();
+                });
 
-            it('register form should visible', function () {
-                expect($('#registerPanel').is(':visible')).to.be.true;
-            })
+                it('register form should be in the page', function () {
+                    expect($('#registerPanel').length).to.be.equal(1);
+                });
+
+                it('register form should visible', function () {
+                    expect($('#registerPanel').is(':visible')).to.be.true;
+                })
+            });
         });
 
         describe('when learn button is clicked', function () {
