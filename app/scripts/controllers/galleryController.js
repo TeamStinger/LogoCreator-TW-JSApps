@@ -27,7 +27,6 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                         notifier.showErrorMessage('Cannot load gallery. Please try again!');
                     });
 
-
                     GalleryController.attachHandlers();
                     $('#showMoreBtn').show();
                 });
@@ -54,7 +53,7 @@ define(['../models/logo', '../models/categories', '../utils/notifier', '../utils
                 $('#dropdown-menu-sort').on('click', 'a', GalleryController.sortOptionClick);
                 $('#dropdown-menu-category').on('click', 'a', GalleryController.categoryOptionClick);
                 $('#grid-btn').on('click', GalleryController.gridButtonClick);
-                $showMoreBtn.hide();
+                $showMoreBtn.show();
                 $showMoreBtn.on('click', function () {
                     var $this = $(this);
                     if (!isEndOfCollection) {
