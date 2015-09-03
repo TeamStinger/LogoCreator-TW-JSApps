@@ -1,0 +1,14 @@
+{
+  "name": "logo-creator",
+  "version": "0.1.0",
+  "author": "Team Stinger",
+  "description": "Team Project for JavaScript Application Course at Telerik Academy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:TeamStinger/LogoCreator-TW-JSApps.git"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
