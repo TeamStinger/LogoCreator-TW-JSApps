@@ -1,16 +1,4 @@
 {{#if isLoggedInUser}}
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        FB = null;
-        var js, fjs = d.getElementsByTagName(s)[0];
-        //if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=514076418757174";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
 <!--<script>-->
 <!--$(window).bind("load", function() {-->
 <!--$.getScript('scripts/utils/social.js', function() {});-->
@@ -82,12 +70,6 @@
                     <div class="col-md-5">
                         <a href="{{this.Uri}}" class="btn btn-primary" role="button">Download</a>
                     </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-primary fake-btn"></button>
-                    </div>
-                    <div class="fb-like" data-href="{{this.Uri}}" data-layout="button"
-                         data-action="like" data-show-faces="false" data-share="false">
-                    </div>
                     {{else}}
                     <div class ="col-md-1">
                     <a href="{{this.Id}}" data-id="{{this.Id}}" class="btn btn-danger" role="button">Delete</a>
@@ -101,8 +83,8 @@
         <div>Cannot find files</div>
         {{/if}}
     </div>
+    <button class="btn btn-default" id="showMoreBtn">Show more</button>
 </div>
 {{else}}
 <div class="alert alert-danger" role="alert">Only registered users can see their logos!</div>
 {{/if}}
-<button class="btn btn-default" id="showMoreBtn">Show more</button>
