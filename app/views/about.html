@@ -4,49 +4,17 @@
     <p>We are a tight group of professionals dedicated to make the web a more user friendly place</p>
 </div>
 <div class="row">
+    {{#each this}}
     <div class="col-md-12">
         <div class="thumbnail">
-            <img class='about-photo' src="http://telerikacademy.com/Content/Avatars/642/26642_47c10f27_180x180.jpg" alt="picture of team memeber">
+            <img class='about-photo' src="{{url}}" alt="picture of team memeber" width="180px">
 
             <div class="caption">
-                <h3>Iliana Bobeva</h3>
+                <h3>{{name}}</h3>
 
-                <p>Student at Telerik Academy 2015/2016</p>
+                <p>{{description}}</p>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="thumbnail">
-            <img class='about-photo' src="https://scontent-vie1-1.xx.fbcdn.net/hprofile-xtp1/v/t1.0-1/c0.76.160.160/p160x160/11885065_1044844535525956_2743580571295685018_n.jpg?oh=7f940c3ee30aa7dbf4991d9f42975a42&oe=5675DD56" alt="picture of team memeber">
-
-            <div class="caption">
-                <h3>Ivaylo Rankov</h3>
-
-                <p>Student at Telerik Academy 2015/2016</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="thumbnail">
-            <img class='about-photo' src="http://telerikacademy.com/Content/Avatars/031/4031_c46f4c2b_180x180.jpg" alt="picture of team memeber">
-
-            <div class="caption">
-                <h3>Lyubomir Svilenov</h3>
-
-                <p>Student at Telerik Academy 2015/2016</p>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-12">
-        <div class="thumbnail">
-            <img class='about-photo' src="https://telerikacademy.com/Content/Avatars/026/19026_959f019e_180x180.jpg" alt="picture of team memeber">
-
-            <div class="caption">
-                <h3>Pavel Pavlov</h3>
-
-                <p>Student at Telerik Academy 2015/2016</p>
-            </div>
-        </div>
-    </div>
+    {{/each}}
 </div>

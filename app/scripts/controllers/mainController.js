@@ -1,9 +1,9 @@
 define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLogo.html', 'text!views/about.html',
         '../utils/viewRenderer', './homeController', '../models/user', '../models/logo', '../utils/storage',
-        './galleryController', './createLogoController', '../utils/notifier', '../models/categories'],
+        './galleryController', './createLogoController', '../utils/notifier', '../models/categories', '../models/authors'],
     function (homeTemplate, galleryTemplate, createLogoTemplate, aboutTemplate,
               viewRenderer, homeController, user, logo, storage,
-              galleryController, createLogoController, notifier, categories) {
+              galleryController, createLogoController, notifier, categories, authors) {
         var MainController = {
             init: function () {
                 new Everlive('pgQ17WjqBcAocZNw'); //This instance is accessed through Everlive.$
@@ -71,7 +71,7 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
             },
 
             aboutClick: function () {
-                viewRenderer.render('#view', aboutTemplate, {});
+                viewRenderer.render('#view', aboutTemplate, authors);
             },
 
             loginClick: function (event) {
