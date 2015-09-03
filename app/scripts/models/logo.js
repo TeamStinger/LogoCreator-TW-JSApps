@@ -6,7 +6,7 @@ define(function () {
 
         getInitial: function () {
             var filter = new Everlive.Query();
-            filter.order('CreatedAt').take(9);
+            filter.orderDesc('CreatedAt').take(9);
             return Everlive.$.Files.get(filter);
         },
 
