@@ -29,6 +29,7 @@
                         <input type="password" name="password" placeholder="Password" class="form-control"/>
                         <button type="submit" class="btn btn-default">Login</button>
                     </form>
+                    <div class="fb-login-button" onlogin="handleFacebookLogin();" data-scope="email" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
                     <span id="display-name"></span>
                     <button class="btn btn-default" id="logout-btn">Logout</button>
                 </div>
@@ -55,5 +56,42 @@
 
     <script src="scripts/lib/everlive.all.js"></script>
     <script src="scripts/lib/require.js" data-main="scripts/main"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '514076418757174',
+                xfbml      : true,
+                version    : 'v2.4'
+            });
+        };
+
+        function handleFacebookLogin() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    var el = new Everlive('pgQ17WjqBcAocZNw');
+                    var accessToken = response.authResponse.accessToken;
+                    el.authentication.loginWithFacebook(accessToken,
+                            function (data) {
+                                //Handle the login
+                                console.log('Backend response');
+                                console.log(data);
+                            },
+                            function(error){
+                                //Display the error message
+                                console.log('Backend error');
+                                console.log(error);
+                            });
+                }
+            });
+        }
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 </html>
