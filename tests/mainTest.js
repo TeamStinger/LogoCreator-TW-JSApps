@@ -36,7 +36,8 @@ require.config({
 });
 
 define(['mocha', 'jquery', 'jqueryUI', 'CryptoJS.SHA1', 'text', 'lightBox', 'noty'], function (mocha) {
-    require(['tests/utils/notifierTests', 'tests/utils/viewRendererTests', 'tests/utils/validatorsTests', 'tests/controllers/homeControllerTests'],
+    require(['tests/utils/notifierTests', 'tests/utils/viewRendererTests', 'tests/utils/validatorsTests',
+            'tests/utils/storageTests', 'tests/controllers/homeControllerTests'],
         function () {
             mocha.run();
         });

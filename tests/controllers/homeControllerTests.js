@@ -1,7 +1,7 @@
 define(['chai', 'sinon', 'controllers/mainController', 'controllers/homeController'], function (chai, sinon, mainController, homeController) {
     var expect = chai.expect;
 
-    describe('homeController', function () {
+    describe('HomeController', function () {
         describe('when user is not logged in', function () {
             describe('when homeClick is initialize', function () {
                 beforeEach(function () {
