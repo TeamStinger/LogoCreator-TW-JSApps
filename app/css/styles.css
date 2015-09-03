@@ -184,6 +184,10 @@ h1 {
     text-decoration: none;
 }
 
+.nav-btn{
+    font-size: 16px;
+}
+
 .thumbnail>img.about-photo{
     display: inline;
 }
