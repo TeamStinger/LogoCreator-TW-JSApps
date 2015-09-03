@@ -1,5 +1,6 @@
-define(['../models/user', '../utils/notifier', '../utils/viewRenderer', 'text!views/about.html', '../utils/validators'],
-    function (user, notifier, viewRenderer, aboutTemplate,validator) {
+define(['../models/user', '../utils/notifier', '../utils/viewRenderer', 'text!views/about.html', '../utils/validators',
+    '../models/authors'],
+    function (user, notifier, viewRenderer, aboutTemplate, validator, authors) {
     var HomeController = {
         attachHandlers: function () {
             var registerForm = $('#registerForm'),
@@ -44,7 +45,7 @@ define(['../models/user', '../utils/notifier', '../utils/viewRenderer', 'text!vi
         },
 
         learnButtonClick: function (event) {
-            viewRenderer.render('#view', aboutTemplate, {});
+            viewRenderer.render('#view', aboutTemplate, authors);
 
             event.preventDefault();
         }

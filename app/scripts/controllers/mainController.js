@@ -70,8 +70,10 @@ define(['text!views/home.html', 'text!views/gallery.html', 'text!views/createLog
                 event.preventDefault();
             },
 
-            aboutClick: function () {
+            aboutClick: function (event) {
                 viewRenderer.render('#view', aboutTemplate, authors);
+
+                event.preventDefault();
             },
 
             loginClick: function (event) {
