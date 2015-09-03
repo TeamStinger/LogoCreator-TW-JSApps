@@ -172,10 +172,16 @@ h1 {
 #showMoreBtn{
     width: 100%;
 }
+
 #validationMsg{
     color:red;
     font-size:12px;
     display: none;
+}
+
+#scroll-btn{
+    color: black;
+    text-decoration: none;
 }
 
 .thumbnail>img.about-photo{
