@@ -1,3 +1,5 @@
+#[LogoJet - Live DEMO](http://logojet.herokuapp.com/)
+
 # Team Stinger
 ## Hello there, this is a SPA application for creating logos :)
 It was created by just 4 people in a week so beware of the bugs! Nah just kidding :P
